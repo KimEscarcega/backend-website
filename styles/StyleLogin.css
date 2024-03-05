@@ -1,0 +1,93 @@
+*{
+border: 0px;
+margin: 0px;
+box-sizing: border-box;
+font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+
+
+}
+body{
+    background-color: rgb(46, 107, 175);
+    
+}
+
+#container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    height: 100vh;
+
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    background-color: whitesmoke;
+
+}
+
+#form h1{
+    font-size: 2rem;
+  
+}
+
+.Input-text{
+   
+    border: solid 1px;
+    padding: 12px;
+    font-size: large;
+    margin: 5px;
+    border-radius: 20px;
+
+
+}
+
+
+.btn{
+    width: 30%;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: lightgrey;
+    font-weight: bold;
+    border-radius: 20pt;
+}
+ 
+.btn:hover{
+    background-color: lightblue;
+    cursor: pointer;
+    
+}
+
+.Signup-link{
+    margin: 13px;
+
+}
+
+.sidecontainer{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+    
+}
+
+.sidecontainer img {
+    width: 94vh;
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
