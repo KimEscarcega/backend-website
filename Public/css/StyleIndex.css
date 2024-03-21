@@ -1,0 +1,71 @@
+/* This is the style sheet for the MAIN page  */
+*{
+    box-sizing: border-box;
+  
+}
+
+main{
+    padding: auto;
+}
+
+h2{
+   align-items: center;
+}
+
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: rgb(151, 151, 151);
+}
+
+nav{
+
+    padding: 0% 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(31, 84, 190);
+    color: rgb(253, 253, 253);
+
+   
+}
+
+#Logo {
+    display: flex;
+    align-items: center;
+}
+
+
+.Loginbtn , .Signupbtn{
+    padding: 1% 2%;
+    background-color: rgb(54, 54, 163);
+    border-radius: 24%;
+   
+}
+
+.Loginbtn{
+    margin-left: 70%;
+}
+
+.Loginbtn a, .Signupbtn a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.Loginbtn a:hover, .Signupbtn a:hover{
+    color: rgb(0, 0, 0);
+
+}
+
+
+#Container {
+    margin-top: 20%;
+    text-align: center;
+
+}
+
+img {
+    width: 75px;
+
+}
