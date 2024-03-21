@@ -1,7 +1,6 @@
-const mysql = require("mysql2");
+
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
 const database = require("../routes/db-config");
 const crypto = require("crypto");
 const asyncHandler = require("express-async-handler");
@@ -19,41 +18,9 @@ const database = mysql.createConnection({
 });
 
 
+router.post("/Signup", Signup);
+router.post("/Login", Login);
 
-
-exports.Signup = (req,res)=>{
-    console.log(req.body);
-    const {FirstName, LastName, Email, Password, Phone} = req.body;
-
-    database.query(`insert into user (firstN , lastN, uEmail, uPassword, uPhone ) values (?, ?, ?, ?, ?)`, [FirstName , LastName, Email, Password, Phone], (err, results) => {
-        if (err){
-            console.log(err);
-        } else {
-            res.send("Form submitted");
-        }
-
-    })
-    
-}
-
-exports.Login= (req,res)=>{
-    console.log(req.body);
-    const {Email, Password} = req.body;
-
-    database.query(`SELECT * FROM user WHERE uEmail = ? AND uPassword = ?`, [Email, Password], (err, results) => {
-        if (err){
-            console.log(err);
-        } 
-
-        if (results.length === 1) {
-            res.send("Login successful"); 
-        } else {
-            res.status(401).send("Wrong Email or Password");
-        }
-
-    });
-    
-}
 
 exports.ForgotPassword= (Email)=>{
     database.query('SELECT * FROM user WHERE uEmail = ? ', [Email] , (err, results) => {
