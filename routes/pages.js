@@ -1,29 +1,29 @@
-const express = require('express');
-
+const express = require("express");
 const router = express.Router();
+const authController = require("../Controllers/auth");
 
-
-router.get('/', (req,res) =>{
-    res.render('Main');
-
+router.get("/", (req, res) => {
+    res.render("index");
 });
 
-
-
-router.get('/Signup', (req,res) =>{
-    res.render('Signup');
-
+router.get("/Signup", (req, res) => {
+    res.sendFile("Signup.html", { root: "./Public/" });
 });
 
-router.get('/Login', (req,res) =>{
-    res.render('Login');
-
+router.get("/Login", (req, res) => {
+    res.sendFile("Login.html", { root: "./Public/" });
 });
 
-
-router.get('/ForgotPassword', (req,res) =>{
-   res.render('ForgotPassword');
-
+router.get("/ForgotPassword.html", (req, res) => {
+    res.sendFile('ForgotPassword.html', { root: "./Public/" });
 });
+
+router.post("/ForgotPassword", authController.HandleforgottenPassword);
+
+router.get("/ResetPassword", (req, res) => {
+    res.sendFile('ResetPassword.html', { root: "./Public/" });
+});
+
+ // router.post("/ResetPassword", authController.HandleResetPassword);
 
 module.exports = router;
