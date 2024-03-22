@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Account</title>
+<link rel="stylesheet" href="/css/Account.css">
+<link rel="icon" type="image/x-icon" href="/Images/favicon.ico.png">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<header>
+    <img src="./Images/logo.PNG" alt="select park logo">
+    <ul id="ul">
+       <li><a href="/account">Account</a></li>
+       <li class="dropdown">
+           <a href="/booking" class="dropbtn">Reservation</a>
+           <div class="dropdown-content">
+             <a href="#">Current Reservation</a>
+             <a href="#">Future Reservation</a>
+             <a href="#">Past Reservation</a>
+           </div>
+         </li>
+
+       <li><a href="/report">Report</a></li>
+       <li><a href="/feedback">Feedback</a></li>
+       <li><a href="/moreinfo">More Information</a></li>
+   </ul>
+</header>
+
+
+<main>
+<section class="container">
+
+    <h4>Account</h4>
+    <div class="user-img">
+        <img src="" id="photo" alt="Avatar"/>
+        <input type="file" id="file">
+        <label for="file" id="buttonupload"><i class="fa fa-camera"></i></label>
+    </div>
+
+    <div class="buttons">
+        <div class="b1">
+        <button type="submit" id="saveprofilepic">Save</button>
+        </div>
+
+        <div class="b2">
+        <button type="submit" id="removeprofilepic">Remove</i></button>
+        </div>
+
+    </div>
+
+
+
+<form id="" action="" method="get">
+<div class="input">
+<input type="email"  placeholder="Email" required/>
+</div>
+
+<div class="input">
+<input type="text"  placeholder="Phone Number" required/>
+</div>
+</form>
+
+<h4>Car Details</h4>
+<form id="carForm">
+  <div class="input">
+    <input type="text" id="licensePlate" placeholder="License Plate" required> <br>
+    <input type="text" id="carMake" placeholder="Car Make" required> <br>
+    <input type="text" id="carModel" placeholder="Car Model" required> <br>
+    <input type="text" id="carColor" placeholder="Car Color" required> <br>
+    
+    <button type="submit">Add Car</button>
+</div>  
+  </form>
+
+  <div id="carList">
+    
+    <ul id="list"></ul>
+  </div>
+
+
+
+<h4>Payment Details</h4>
+<form id="CardForm">
+
+<div class="input">
+
+<input type="input" id="DCC" type="text" placeholder="Debit/Credit Card" required/> <br>
+<input type="input" id="DCCDate" type="number" placeholder="MM/YY" required/> <br>
+<input type="input" id="CVV" type="number" placeholder="CVV" required/> <br>
+<input type="input" id="Zip" type="number" placeholder="Zip Code" required/> <br>
+
+<button type="submit">Add Debit/Credit Card</button> 
+
+</div>
+
+</form>
+<div id="CardList">
+  
+  <ul id="CardListt"></ul>
+</div>
+
+
+<div>
+    <button type="submit" class="button">Save</button>
+</div>
+<br/>
+<br/>
+
+</section>
+</main>
+
+<footer>
+Created by Group 4 
+</footer>
+
+
+<script src="/js/account.js"></script>
+</body>
+</html>

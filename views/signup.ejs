@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SignUp</title>
+        <link rel="Stylesheet" href="css/StyleSignUp.css"/>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link  href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+
+      
+
+
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <a href="/login"> <i class='bx bx-arrow-back' ><b>Login</b></i></a>
+
+            </nav>
+        </header>
+        <main>
+
+
+            <section id="Box">
+                
+
+                <h2>Create an Account</h2>
+                
+
+                <form id="signupbob" action="/signup" method="POST">
+
+
+                    <!-- This is what the user will be inputing -->
+                    <div class="Input-text">
+                        <input  type="text" name="firstname" placeholder="First Name" required="Input-text" />     <input type="text" name ="lastname" placeholder="Last Name" required="Input-text"/>
+                      
+                    </div>
+
+                    <div class="Input-text">
+                        <input type="email"  name="email"   placeholder="Email"  required="Input-text"/>
+                        
+                    </div>
+                    
+                    <div class="Input-text">
+                        <input type="password" name ="password" placeholder="Create Password" required="Input-text"/>
+                        
+
+                    </div>
+
+                    <div class="Input-text">
+                        <input type="text" name ="phone" placeholder="Phone Number" required="Input-text"/>
+                       
+
+                    </div>
+
+                    <!-- display if error or if all the information is new  -->
+                    
+                    <div id="error" style="display: none"></div>
+                    <div id="Success" style="display: none"></div>
+                    
+
+
+                    <div class="btnbox" >
+                        <button type="submit" class="btn">Sign Up </button>
+                    </div>
+
+                </form>
+            </section>
+
+        </main>
+        <script src="js/signup.js"> </script>
+    </body>
+</html>
+
+
