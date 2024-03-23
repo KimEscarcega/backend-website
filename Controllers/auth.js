@@ -1,6 +1,6 @@
-
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const database = require("../routes/db-config");
 const crypto = require("crypto");
 const asyncHandler = require("express-async-handler");
@@ -9,37 +9,6 @@ const Login = require("./Login");
 const nodemailer = require("nodemailer");
 
 
-const database = mysql.createConnection({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
-
-});
-
-
-router.post("/Signup", Signup);
-router.post("/Login", Login);
-
-
-exports.ForgotPassword= (Email)=>{
-    database.query('SELECT * FROM user WHERE uEmail = ? ', [Email] , (err, results) => {
-        if (err) {
-            console.log(err);
-        }
-
-        // Check if a user with the given email exists
-        if (results.length > 0) {
-            // If a user with the given email exists, log the first result
-            //console.log(results[0]);
-            res.send("Email Sent")
-        } else {
-            // If no user with the given email exists, handle it appropriately
-            res.send("No user found with the provided email");
-        }
-    });
-
-  
 // SQL queries used for password reset
 const q = "SELECT * FROM user WHERE uEmail = ?";
 const w = "DELETE FROM password_resets WHERE uEmail = ?";
@@ -73,6 +42,7 @@ const r = "UPDATE user SET uPassword = ? WHERE uEmail = ?";
             console.log(error);
             res.status(500).send('An error occurred with token generation');
           } else {
+            const resetPasswordUrl = `http://localhost:8080/resetPassword?token=${resetToken}&email=${email}`;
             const transporter = nodemailer.createTransport({
               host: 'smtp.gmail.com', //for gmail
               port: 465,
@@ -88,7 +58,7 @@ const r = "UPDATE user SET uPassword = ? WHERE uEmail = ?";
             from: process.env.EMAIL,
             to: email,
             subject: 'Password Reset',
-            html: `<p>Hello ${email}, It has come to our attention that you would like to reset your password. </p><p>Please follow the link provided <a href="http://localhost:8080/Public/ResetPassword.html?token=${resetToken}&email=${email}">here</a> to reset your password now.</p>`
+            html: `<p>Hello ${email}, It has come to our attention that you would like to reset your password. </p><p>Please follow the link provided <a href="http://localhost:8080/resetPassword?token=${resetToken}&email=${email}">here</a> to reset your password now.</p>`
           };
               
               //Here the email will be sent if its in the database.
@@ -112,10 +82,22 @@ const r = "UPDATE user SET uPassword = ? WHERE uEmail = ?";
 
 // Reset password handler
 exports.HandleResetPassword = asyncHandler(async (req, res) => {
-    const { email, newPassword, token } = req.body;
+    const { email, token } = req.params; //url parameters
+    const { NewPassword, ConfirmPassword } = req.body; //data recieved from form
+    // console.log(NewPassword)
+    // console.log(ConfirmPassword)
 
+    // TO DO: Check if pwd and confrimPwd are the same
+  if (NewPassword != ConfirmPassword) {
+    return res.render('reset_password', {
+      title: 'Reset Password',
+      errors: 'The passwords did not match!',
+      email: email, // Pass email back to the template for rendering
+      token: token  // Pass token back to the template for rendering
+    });
+  }
     // Check if email, newPassword, and token are provided
-    if (!email || !newPassword || !token) {
+    if (!email || !NewPassword || !token) {
         return res.status(400).json({ error: 'Email, newPassword, and token needed.' });
     }
 
@@ -152,18 +134,4 @@ exports.HandleResetPassword = asyncHandler(async (req, res) => {
         });
     });
 });
-
-
-
-  
-}
-
-
-
-
-
-
-
-
-
 
