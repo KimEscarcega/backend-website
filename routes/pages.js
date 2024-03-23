@@ -1,105 +1,42 @@
-const express = require("express"); 
-const database = require("../routes/db-config.js");
+const express = require("express");
 const router = express.Router();
-const bodyParser = require('body-parser');
-const Controller = require("../Controllers/auth.js")
+const authController = require("../Controllers/auth");
 
-
-
-//take the forms 
-router.use(bodyParser.urlencoded({ extended: false }));
-
- 
-//const users= [];
-
-
-
-
-
-router.get("/", (req,res)=>{
-    res.render("index");
+router.get("/", (req, res) => {
+    res.render("home", {
+        title: 'Initial Page'
+    });
 });
 
-
-
-router.get("/login",  (req,res)=>{
-    res.render("login");
+router.get("/signup", (req, res) => {
+    res.render("signup_form", {
+        title: 'Sign Up'
+    });
 });
 
-
-
-router.get("/main", (req,res) =>{
-    res.render("main", {firstname :'Kim'})
-})
-
-
-router.get("/forgotpassword", (req,res)=>{
-    res.render("forgotpassword");
+router.get("/login", (req, res) => {
+    res.render("login_form", {
+        title: 'Login'
+    });
 });
 
-
-
-router.get("/signup", (req,res)=>{
-    res.render("signup");
+router.get("/forgotPassword", (req, res) => {
+    res.render("forgotten_password", {
+        title: 'Forgotten Password'
+    });
 });
 
-router.get("/account", (req,res)=>{
-    res.render("account");
+router.post("/forgotPassword", authController.HandleforgottenPassword);
+
+router.get("/resetPassword", (req, res) => {
+    res.render("reset_password", {
+        title: 'Reset Password',
+        errors: undefined,
+        email: undefined, // Pass email back to the template for rendering
+        token: undefined
+    });
 });
 
-router.get("/booking", (req,res)=>{
-    res.render("booking");
-});
-
-router.get("/report", (req,res)=>{
-    res.render("report");
-});
-
-router.get("/feedback", (req,res)=>{
-    res.render("feedback");
-});
-
-router.get("/moreinfo", (req,res)=>{
-    res.render("moreinfo");
-});
-
-
-
-
-
-
-
-
-
-//information submited to create an account 
-router.post("/signup", Controller, (req,res)=>{
-    const { firstname, lastname, email, password, phone } = req.body;
-    
-})
-//infromation that is checked 
-router.post("/login", Controller, (req, res) =>{
-    const { email, password } = req.body;
-
-   
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.post("/resetPassword", authController.HandleResetPassword);
 
 module.exports = router;
