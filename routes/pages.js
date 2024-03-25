@@ -2,6 +2,29 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../Controllers/auth");
 
+
+
+router.use(bodyParser.urlencoded({ extended: false }));
+
+
+//secret key ??(youtube)
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(64).toString('hex');
+
+router.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: false
+}));
+//
+
+//controllers
+//const Controller = require("../Controllers/auth.js");
+const signupController = require('../Controllers/signup.js');
+const loginController = require('../Controllers/login.js');
+//const loggedController = require("../Controllers/Loggedin.js");
+
+
 router.get("/", (req, res) => {
     res.render("home", {
         title: 'Initial Page'
@@ -25,6 +48,84 @@ router.get("/forgotPassword", (req, res) => {
         title: 'Forgotten Password'
     });
 });
+
+
+router.get("/main", (req,res) =>{ 
+    const firstname = req.session.firstname;  
+    res.render("main", {firstname : firstname});
+});
+
+
+//users information
+router.get("/account", (req,res)=>{
+    res.render("account");
+});
+
+//reservations
+
+router.get("/booking", (req,res)=>{
+    res.render("booking");
+});
+
+router.get("/current", (req,res)=>{
+    res.render("current");
+});
+
+router.get("/future", (req,res)=>{
+    res.render("future");
+});
+
+router.get("/past", (req,res)=>{
+    res.render("past");
+});
+
+
+//report
+
+router.get("/report", (req,res)=>{
+    res.render("report");
+});
+
+
+
+//other
+router.get("/feedback", (req,res)=>{
+    res.render("feedback");
+});
+
+router.get("/moreinfo", (req,res)=>{
+    res.render("moreinfo");
+});
+
+
+
+
+//information submited to create an account 
+router.post("/signup", signupController.signup);
+
+
+//infromation that is checked 
+router.post("/login", loginController.login);
+
+router.post('/login', (req, res) => {
+    res.redirect('/main');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.post("/forgotPassword", authController.HandleforgottenPassword);
 
