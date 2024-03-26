@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* Add debit/credit card */
 document.addEventListener('DOMContentLoaded', function () {
   const cardForm = document.getElementById('CardForm');
-  const CardList = document.getElementById('CardListt');
+  const cardList = document.getElementById('CardList');
 
   cardForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -105,32 +105,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const MMYY = document.getElementById('DCCDate').value;
     const CVV = document.getElementById('CVV').value;
     const ZipCode = document.getElementById('Zip').value;
+    
     addCard(DebitCreditCard, MMYY, CVV, ZipCode);
     cardForm.reset();
   });
 
   function addCard(DebitCreditCard, MMYY, CVV, ZipCode) {
     const listItem = document.createElement('li');
-    listItem.innerHTML = `
-      <h4>Your Cards:</h4>
-      <b>Debit/Credit Card #: </b>${DebitCreditCard}, <b>Date: </b>${MMYY}, <b>CVV: </b> ${CVV}, <b>Zip Code: </b>${ZipCode}
-      <button class="edit">Edit</button>
-      <button class="remove">Remove</button>
-    `;
-    CardList.appendChild(listItem);
+    listItem.innerHTML = 
+    "<b>Debit Card:</b> <span class='DCC'>" + DebitCreditCard + "</span>" + ", <b>Experation Date:</b> <span class='DCCDate'>" + MMYY +  "</span>, <b>CVV:</b> <span class='CVV'>" + CVV + "</span>" +
+    ", <b>Zip Code:</b> <span class='Zip'>" + ZipCode + "</span>" +  " <button class='edit'>Edit</button>" +
+    " <button class='remove'>Remove</button>";
+    cardList.appendChild(listItem);
 
     listItem.querySelector('.edit').addEventListener('click', function () {
-      const newDCC = prompt('Enter new Debit/Credit Card Number:', DebitCreditCard);
-      const newMMYY = prompt('Enter new expiration date:', MMYY);
-      const newCVV = prompt('Enter a new CVV number:', CVV);
-      const newZipCode = prompt('Enter a new zip code:', ZipCode);
-      if (newDCC && newMMYY && newCVV && newZipCode) {
-        listItem.innerHTML = `
-          <b>Debit/Credit Card: </b>${newDCC}, <b>Date: </b>${newMMYY}, <b>CVV: </b>${newCVV}, <b>Zip Code: </b>${newZipCode}
-          <button class="edit">Edit</button>
-          <button class="remove">Remove</button>
-        `;
-      }
+      const newDebitCreditCard = prompt('Enter new Debit/Credit Card number:', DebitCreditCard);
+      const newMMYY = prompt('Enter new experation date:',MMYY);
+      const newCVV = prompt('Enter new CVV', CVV);
+      const newZip =prompt('Enter new zip code:', ZipCode);
+      
+
+      listItem.querySelector('.DCC').textContent=newDebitCreditCard;
+      listItem.querySelector('.DCCDate').textContent=newMMYY;
+      listItem.querySelector('.CVV').textContent=newCVV;
+      listItem.querySelector('.Zip').textContent=newZip;
+
     });
 
     listItem.querySelector('.remove').addEventListener('click', function () {
@@ -138,4 +137,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
-
