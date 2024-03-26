@@ -73,10 +73,13 @@ header{
 
 footer{
   background-color: rgb(39, 89, 150);
-  padding: 60px;
-  height:auto;
-  
   color: #f1f1f1;
+  display: flex;
+  align-self: end;
+  justify-self: stretch;
+  bottom: 0;
+  padding: 20px;
+  width: 100%;
 }
     
     

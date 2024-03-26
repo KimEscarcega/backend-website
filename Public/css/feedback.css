@@ -141,6 +141,11 @@ h1, h2, p{
 }
 footer{
     background-color: rgb(39, 89, 150);
-    padding: 40px;
-    color: #FFFFFF;
+    color: #f1f1f1;
+    display: flex;
+    align-self: end;
+    justify-self: stretch;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
 }

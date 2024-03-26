@@ -135,13 +135,19 @@ form{
 
 footer{
     
-    align-content: center;
+    /*align-content: center;
     justify-content: center; 
     text-align: center;
     margin: 0%;
-    padding: 2%;
+    padding: 2%;*/
     background-color:  rgb(39, 89, 150);
-   
+    color: #f1f1f1;
+    display: flex;
+    align-self: end;
+    justify-self: stretch;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
 }
 
 img {
