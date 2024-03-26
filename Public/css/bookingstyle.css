@@ -312,6 +312,19 @@ body{
     text-align: center;
   }
 
+  .footer2{
+    background-color: rgb(39, 89, 150);
+    color: #f1f1f1;
+    display: flex;
+    position: fixed;
+    align-self: end;
+    justify-self: stretch;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
+
+  }
+
 
 
 
