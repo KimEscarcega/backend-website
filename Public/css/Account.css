@@ -7,7 +7,7 @@ body{
 }
 
 
-#ul {
+ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -68,6 +68,11 @@ header{
   background-color: rgb(39, 89, 150);
   margin: 0;
   height: auto;
+}
+
+.logoutbtn{
+  float: right;
+  background-color: rgb(122, 199, 224);
 }
 
 footer{

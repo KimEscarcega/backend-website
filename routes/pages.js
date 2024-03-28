@@ -1,11 +1,20 @@
-const express = require("express");
+const express = require("express"); 
 const router = express.Router();
-const authController = require("../Controllers/auth");
+const bodyParser = require('body-parser');
 const session = require("express-session");
 
 
-
 router.use(bodyParser.urlencoded({ extended: false }));
+
+
+
+//controllers
+
+const authController = require("../Controllers/auth");
+const signupController = require('../Controllers/signup.js');
+const loginController = require('../Controllers/login.js');
+const loggedController = require("../Controllers/Loggedin.js");
+const accountController = require("../Controllers/account.js");
 
 
 //secret key ??(youtube)
@@ -19,35 +28,22 @@ router.use(session({
 }));
 //
 
-//controllers
-//const Controller = require("../Controllers/auth.js");
-const signupController = require('../Controllers/signup.js');
-const loginController = require('../Controllers/login.js');
-//const loggedController = require("../Controllers/Loggedin.js");
 
 
-router.get("/", (req, res) => {
-    res.render("home", {
-        title: 'Initial Page'
-    });
+
+router.get("/", (req,res)=>{
+    res.render("index");
+   
 });
 
-router.get("/signup", (req, res) => {
-    res.render("signup_form", {
-        title: 'Sign Up'
-    });
+
+
+router.get("/login", (req,res)=>{
+    res.render("login", { message: null });
 });
 
-router.get("/login", (req, res) => {
-    res.render("login_form", {
-        title: 'Login'
-    });
-});
-
-router.get("/forgotPassword", (req, res) => {
-    res.render("forgotten_password", {
-        title: 'Forgotten Password'
-    });
+router.get("/signup", (req,res)=>{
+    res.render("signup");
 });
 
 
@@ -57,15 +53,30 @@ router.get("/main", (req,res) =>{
 });
 
 
+router.get("/forgotpassword", (req,res)=>{
+    res.render("forgotpassword");
+});
+
+
+
+
+
 //users information
 router.get("/account", (req,res)=>{
-    res.render("account");
+    const firstname = req.session.firstname; 
+    res.render("account", {firstname: firstname});
+
 });
 
 //reservations
 
 router.get("/booking", (req,res)=>{
     res.render("booking");
+});
+
+router.get("/parkinglot", (req,res)=>{
+    res.render("parkinglot");
+
 });
 
 router.get("/current", (req,res)=>{
@@ -81,6 +92,7 @@ router.get("/past", (req,res)=>{
 });
 
 
+
 //report
 
 router.get("/report", (req,res)=>{
@@ -89,7 +101,7 @@ router.get("/report", (req,res)=>{
 
 
 
-//other
+
 router.get("/feedback", (req,res)=>{
     res.render("feedback");
 });
@@ -97,6 +109,13 @@ router.get("/feedback", (req,res)=>{
 router.get("/moreinfo", (req,res)=>{
     res.render("moreinfo");
 });
+
+
+
+
+
+
+
 
 
 
@@ -114,20 +133,6 @@ router.post('/login', (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.post("/forgotPassword", authController.HandleforgottenPassword);
 
 router.get("/resetPassword", (req, res) => {
@@ -140,5 +145,30 @@ router.get("/resetPassword", (req, res) => {
 });
 
 router.post("/resetPassword", authController.HandleResetPassword);
+
+
+
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

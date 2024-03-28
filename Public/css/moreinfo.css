@@ -79,6 +79,11 @@ li.dropdown{
     display: block;
 }
 
+.logoutbtn{
+    float: right;
+    background-color: rgb(122, 199, 224);
+}
+
 /* Styling the headings */
 h1, h2 {
     color: #000000;

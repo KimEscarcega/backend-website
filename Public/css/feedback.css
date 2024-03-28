@@ -18,8 +18,9 @@ header{
 /* Styling the Select Park logo */
 img{
     width: 100px;
-    padding-bottom: 1%;
-    padding-top: 1%;
+    height: auto;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 /* Styling the navigation bar */
@@ -76,6 +77,11 @@ li.dropdown{
     display: block;
 }
 
+.logoutbtn{
+    float: right;
+    background-color: rgb(122, 199, 224);
+}
+
 /* Styling the headings and p elements */
 h1, h2, p{
     color: #000000;
@@ -87,7 +93,18 @@ h1, h2, p{
 }
 
 .capBeforeTxt{
-    margin-right: 32%;
+    margin-right: 39%;
+}
+
+/* Styling date input */
+#fbDate{
+    text-align: center;
+    padding: 1% 0 ;
+}
+
+input[type="time"]{
+    padding: 15px 25px;
+    margin-bottom: 1%;
 }
 
 /* Styling the textbox */
@@ -141,11 +158,13 @@ h1, h2, p{
 }
 footer{
     background-color: rgb(39, 89, 150);
-    color: #f1f1f1;
     display: flex;
     align-self: end;
     justify-self: stretch;
     bottom: 0;
     padding: 20px;
-    width: 100%;
-}
+    width: auto;
+  }
+  footer p{
+    color: #f1f1f1;
+  }
