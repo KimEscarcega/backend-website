@@ -1,12 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const express= require("express");
+const router =express.Router();
 const bcrypt = require("bcrypt");
 const database = require("../routes/db-config");
 const crypto = require("crypto");
 const asyncHandler = require("express-async-handler");
-const Signup = require("./Signup");
-const Login = require("./Login");
 const nodemailer = require("nodemailer");
+
+
 
 
 // SQL queries used for password reset
@@ -134,4 +134,3 @@ exports.HandleResetPassword = asyncHandler(async (req, res) => {
         });
     });
 });
-
