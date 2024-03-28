@@ -64,8 +64,11 @@ router.get("/forgotpassword", (req,res)=>{
 
 //users information
 router.get("/account", (req,res)=>{
-    const firstname = req.session.firstname; 
-    res.render("account", {firstname: firstname});
+    const firstname = req.session.firstname;
+    const email=req.session.email;
+    const phone=req.session.phone;
+    const uID=req.session.userId
+    res.render("account", {firstname: firstname,email:email,phone:phone,uID:uID});
 
 });
 
@@ -139,6 +142,10 @@ router.post("/login", loginController.login);
 router.post('/login', (req, res) => {
     res.redirect('/main');
 });
+
+router.post('/addCar', accountController.addCar);
+
+
 
 
 
