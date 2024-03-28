@@ -49,35 +49,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
   carForm.addEventListener('submit', function (event) {
     event.preventDefault();
-    const licensePlate = document.getElementById('licensePlate').value;
-    const carMake = document.getElementById('carMake').value;
-    const carModel = document.getElementById('carModel').value;
-    const carColor = document.getElementById('carColor').value;
-    
-    addCar(licensePlate, carMake, carModel, carColor);
+    const plate = document.querySelector('input[name="plate"]').value;
+    const make = document.querySelector('input[name="make"]').value;
+    const model = document.querySelector('input[name="model"]').value;
+    const color = document.querySelector('input[name="color"]').value;
+
+    addCar(plate,make,model,color);
+    addCarToDatabase(plate, make, model, color);
     carForm.reset();
   });
 
-  function addCar(licensePlate, carMake, carModel, carColor) {
+  function addCarToDatabase(plate, make, model, color) {
+    fetch('/addCar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ plate, make, model, color })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
+        addCar(plate, make, model, color);
+      } else {
+        console.error('Error adding car:', data.error);
+      }
+    })
+    .catch(error => console.error('Error adding car:', error));
+  }
+
+  function addCar(plate, make, model, color) {
     const listItem = document.createElement('li');
-    listItem.innerHTML = 
-    "<b>License Plate:</b> <span class='plate'>" + licensePlate + "</span>" + ", <b>Car Make:</b> <span class='make'>" + carMake +  "</span>, <b>Car Model:</b> <span class='model'>" + carModel + "</span>" +
-    ", <b>Car Color:</b> <span class='color'>" + carColor + "</span>" +  " <button class='edit'>Edit</button>" +
-    " <button class='remove'>Remove</button>";
+    listItem.innerHTML = `
+      <b>License Plate:</b> <span class='plate'>${plate}</span>,
+      <b>Car Make:</b> <span class='make'>${make}</span>,
+      <b>Car Model:</b> <span class='model'>${model}</span>,
+      <b>Car Color:</b> <span class='color'>${color}</span>
+      <button class='edit'>Edit</button>
+      <button class='remove'>Remove</button>`;
+    
     carList.appendChild(listItem);
 
     listItem.querySelector('.edit').addEventListener('click', function () {
-      const newLicensePlate = prompt('Enter new license plate:', licensePlate);
-      const newCarMake=prompt('Enter new car make:',carMake);
-      const newCarModel = prompt('Enter new car model:', carModel);
-      const newCarColor=prompt('Enter new car color:', carColor);
-      
+      const newPlate = prompt('Enter new license plate:', plate);
+      const newMake = prompt('Enter new car make:', make);
+      const newModel = prompt('Enter new car model:', model);
+      const newColor = prompt('Enter new car color:', color);
 
-      listItem.querySelector('.plate').textContent=newLicensePlate;
-      listItem.querySelector('.make').textContent=newCarMake;
-      listItem.querySelector('.model').textContent=newCarModel;
-      listItem.querySelector('.color').textContent=newCarColor;
-
+      listItem.querySelector('.plate').textContent = newPlate;
+      listItem.querySelector('.make').textContent = newMake;
+      listItem.querySelector('.model').textContent = newModel;
+      listItem.querySelector('.color').textContent = newColor;
     });
 
     listItem.querySelector('.remove').addEventListener('click', function () {
