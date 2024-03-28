@@ -15,6 +15,7 @@ const signupController = require('../Controllers/signup.js');
 const loginController = require('../Controllers/login.js');
 const loggedController = require("../Controllers/Loggedin.js");
 const accountController = require("../Controllers/account.js");
+const feedbackController = require("../Controllers/feedback.js");
 
 
 //secret key ??(youtube)
@@ -103,8 +104,11 @@ router.get("/report", (req,res)=>{
 
 
 router.get("/feedback", (req,res)=>{
-    res.render("feedback");
+   res.render("feedback");
 });
+
+
+
 
 router.get("/moreinfo", (req,res)=>{
     res.render("moreinfo");
@@ -118,6 +122,11 @@ router.get("/moreinfo", (req,res)=>{
 
 
 
+router.post("/feedback", feedbackController.feedback);
+
+router.post("/feedback", (req, res) =>{
+    res.redirect('/main');
+});
 
 
 //information submited to create an account 

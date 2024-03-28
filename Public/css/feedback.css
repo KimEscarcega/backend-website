@@ -102,7 +102,7 @@ h1, h2, p{
     padding: 1% 0 ;
 }
 
-input[type="time"]{
+input[type="date"]{
     padding: 15px 25px;
     margin-bottom: 1%;
 }
@@ -132,6 +132,12 @@ input[type="time"]{
       margin: 20px;
       margin-left: 42%;
 
+}
+button a{
+    text-decoration: none;
+}
+a:visited{
+    color: white;
 }
 
 #laterbtn:hover{
