@@ -180,7 +180,18 @@ body{
   box-shadow: 2px 4px 4px rgb(0, 0, 0, 0.644);
  }
 
+ .container h1{
+  text-align: center;
+  font-size:15pt ;
+}
 
+.email{
+  text-align: center;
+}
+
+.phone{
+  text-align: center;
+}
 
 
     .container h4{
