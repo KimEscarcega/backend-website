@@ -4,6 +4,7 @@
         <title>
             Feedback
         </title>
+        
         <link rel="stylesheet" href="/css/feedback.css"/>
 
         <link rel="icon" type="image/x-icon" href="/Images/favicon.ico.png">
@@ -38,39 +39,36 @@
         </header>
 
         <main>
-        <h1>Thank you for booking with Select Park!</h1>
-
-        
-            <h2 class="RateHeader">Rate Us</h2>
-
+            <h1>Thank you for booking with Select Park!</h1>
+    
             
-                <form id="feedbackform" action="/feedback" method="POST">    
-
-                    <div id="fbDate">
-                        <label>Enter today's date: </label>
-                        <input name="feedbackDate" type="date" required min=""/>
-                     </div>
-        
-                    <p class="capBeforeTxt">Please write a review...</p>
-        
-                    <div>
-                    <textarea name="reviewtxt" id="reviewtext" placeholder="(150 character limit)"></textarea>
-                    </div>
-
-                    <div>
-        
-                    <button id="laterbtn"><a href="/main">Later</a></button>
-                    <button type="submit" id="submitbtn">Submit</button>
-        
-                    </div>
-                </form>
-
-    </main>
+                <h2 class="RateHeader">Rate Us</h2>
+               
+    
+            <form id="feedbackform" method="POST" action="/feedback">
+                <div id="fbDate"> 
+                    <label>Enter today's date: </label>
+                    <input name="feedbackDate" type="date" required min="">
+                </div>
+                
+                <p class="capBeforeTxt">Please write a review...</p>
+                <textarea name="reviewtxt" id="reviewtext" placeholder="(150 character limit)"></textarea>
+    
+             <!-- <div> -->
+               <!-- <button id="laterbtn"><a href="/main">Later</a></button> -->
+                <input type="submit" id="submitbtn">
+                <!-- </div> -->
+            </form>
+    
+            
+        </main>
 
         <footer>
            <p> Created by Group 4 </p>
         </footer>
 
-        <script src="js/feedback.js"> </script>
+        
+        
+       
     </body>
 </html>

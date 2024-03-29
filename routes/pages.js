@@ -16,6 +16,8 @@ const loginController = require('../Controllers/login.js');
 const loggedController = require("../Controllers/Loggedin.js");
 const accountController = require("../Controllers/account.js");
 const feedbackController = require("../Controllers/feedback.js");
+const bookingController = require("../Controllers/booking.js");
+const parkinglotController = require("../Controllers/parkinglot.js");
 
 
 //secret key ??(youtube)
@@ -75,6 +77,8 @@ router.get("/account", (req,res)=>{
 //reservations
 
 router.get("/booking", (req,res)=>{
+    const uID = req.session.userId;
+    res.render("booking",{uID: uID});
     res.render("booking");
 });
 
@@ -82,6 +86,31 @@ router.get("/parkinglot", (req,res)=>{
     res.render("parkinglot");
 
 });
+
+
+router.get("/confirm", (req,res)=>{
+
+
+const bookingrequest ={
+    lotnumber: req.session.lotnumber,
+    appdate:req.session.appdate,
+    startTime:req.session.startTime,
+    endTime:req.session.endTime,
+    
+}
+       
+
+   
+
+
+    res.render("confirm",{bookingrequest});
+
+});
+
+
+
+
+
 
 router.get("/current", (req,res)=>{
     res.render("current");
@@ -125,11 +154,11 @@ router.get("/moreinfo", (req,res)=>{
 
 
 
+
+
 router.post("/feedback", feedbackController.feedback);
 
-router.post("/feedback", (req, res) =>{
-    res.redirect('/main');
-});
+
 
 
 //information submited to create an account 
@@ -142,6 +171,20 @@ router.post("/login", loginController.login);
 router.post('/login', (req, res) => {
     res.redirect('/main');
 });
+
+
+
+//booking
+router.post('/booking', bookingController.bookingform);
+router.post('/parkinglot', bookingController.lot);
+router.post('/confirm', bookingController.confirm);
+
+
+
+
+
+
+
 
 router.post('/addCar', accountController.addCar);
 

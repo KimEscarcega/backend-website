@@ -12,7 +12,7 @@
 
     <header>
 
-        <img src="/Images/logo.PNG" alt="select park logo">
+        <img src="./Images/logo.PNG" alt="select park logo">
 
            
              <ul>
@@ -47,7 +47,7 @@
 
 
 
-            <form id="bookingInfo" action="/parkinglot" method="GET">
+            <form id="booking" action="/booking" method="POST">
 
             <div class="date">
             <label for="date-input">Date:</label>
@@ -74,6 +74,9 @@
 
             </div>
 
+            <input id="uID" type="hidden" name="uID" value= "<%=uID%>">
+
+
             <div class="buttons">
 
               <input type="reset" class="cncl" value="cancel">
@@ -90,7 +93,7 @@
 
     </footer>
 
-    <script src="/js/booking.js"></script>
+    <script src="./js/booking.js"></script>
     
 </body>
 </html>

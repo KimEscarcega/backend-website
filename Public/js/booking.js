@@ -1,11 +1,12 @@
+  
   function selected(spot) {
-  const date = new URLSearchParams(window.location.search).get('date');
-  const startTime = new URLSearchParams(window.location.search).get('startTime');
-  const endTime = new URLSearchParams(window.location.search).get('endTime');
-
-
-    window.location.href = `confirm.html?date=${date}&startTime=${startTime}&endTime=${endTime}&spot=${spot}`;}
-
+   
+      // Set the selected lot number in the hidden input field
+      document.getElementById("spot").value = spot;
+      document.getElementById("parkinglot").submit();
+      
+  }
+    
 
     
 /* for confirm.html */
