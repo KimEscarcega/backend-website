@@ -9,6 +9,7 @@ create table vehicle(vID varchar(10) not null, uID int unsigned, make varchar(60
 create table lot(lNo varchar(10) not null, location varchar(60), primary key(lNo));
 create table user_lot(uID int unsigned, lNo varchar(10), date date, timein time, timeout time, price decimal(4,2), primary key(lNo, date, timein, timeout), foreign key(uID) references user(uID) on update cascade on delete set null, foreign key(lNo) references lot(lNo) on update cascade);
 
+create table password_resets (id INT AUTO_INCREMENT PRIMARY KEY,email VARCHAR(255) NOT NULL, token VARCHAR(255) NOT NULL, createdAt expires_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (email) REFERENCES user(uEmail));
 
 
 
