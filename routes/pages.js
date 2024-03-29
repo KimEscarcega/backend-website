@@ -122,11 +122,11 @@ router.get("/moreinfo", (req,res)=>{
 
 
 
+
+
 router.post("/feedback", feedbackController.feedback);
 
-router.post("/feedback", (req, res) =>{
-    res.redirect('/main');
-});
+
 
 
 //information submited to create an account 
