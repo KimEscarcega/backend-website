@@ -4,17 +4,18 @@ const express = require('express');
 const router = express.Router();
 
 
-
 exports.addCar = (req, res) => {
     // Retrieve car data from the request body
     const make = req.body.make;
     const model = req.body.model;
     const color = req.body.color;
     const plate = req.body.plate;
+    const uID = req.body.uID; // Retrieve user's ID from the request body
+   
 
     console.log("Received car data:", req.body); // Log received data
 
-    if (!make || !model || !color || !plate) {
+    if (!make || !model || !color || !plate|| !uID) {
         return res.json({ status: "error", error: "Please enter ALL information" });
     } else {
         database.query(`SELECT plate FROM vehicle WHERE plate = ?`, [plate], async (err, result) => {
@@ -23,17 +24,14 @@ exports.addCar = (req, res) => {
                 return res.status(500).json({ status: "error", error: "Database error" });
             }
 
-            console.log("Query result:", result); // Log query result
-
             if (result.length > 0) {
                 console.log("Car with plate", plate, "already exists."); // Log car already exists
             }
 
             // Construct SQL query for insertion
-            const sql = `INSERT INTO vehicle (make, model, color, plate) VALUES (?, ?, ?, ?)`;
-            console.log("SQL query:", sql); // Log SQL query
-
-            database.query(sql, [make, model, color, plate], (error, results) => {
+            const sql = `INSERT INTO vehicle (uID, make, model, color, plate) VALUES (?, ?, ?, ?, ?)`;
+            
+            database.query(sql, [uID,make, model, color, plate], (error, results) => {
                 if (error) {
                     console.error("Insertion error:", error); // Log insertion error
                     return res.status(500).json({ status: "error", error: "Database error" });
@@ -44,6 +42,7 @@ exports.addCar = (req, res) => {
             });
         });
     }
+
 };
 
 
@@ -67,7 +66,7 @@ exports.deleteCar = (req, res) => {
 
 exports.getAllCars = (req, res) => {
     // Fetch all cars from the database
-    database.query('SELECT * FROM vehicle', (err, results) => {
+    database.query('SELECT * FROM vehicle ', (err, results) => {
         if (err) {
             console.error('Error fetching cars from database:', err);
             return res.status(500).json({ error: 'Error fetching cars from database' });

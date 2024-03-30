@@ -71,6 +71,7 @@
 <h4><u>Car Details</u></h4>
 <form id="carForm" action=" " method="post">
 
+  <input id="uID" type="hidden" name="uID" value= "<%=userInfo.uID%>">
   <div class="input">
     
     <input type="text" name="plate" placeholder="License Plate" id="plate" required>
@@ -89,6 +90,7 @@
     <h4>Your Cars:</h4>
     <ul id="list"></ul>
   </div>
+
 
 
 
@@ -113,9 +115,7 @@
 </div>
 
 
-<div>
-    <button type="submit" class="button">Save</button>
-</div>
+
 <br/>
 <br/>
 
