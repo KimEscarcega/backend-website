@@ -63,17 +63,17 @@
 </form>
 
 <h4>Car Details</h4>
-<form id="carForm" action="/addCar" method="post">
-  <input id="uID" type="hidden" name="uID" value= "<%=uID%>">
+<form id="carForm" action=" " method="post">
+
   <div class="input">
     
-    <input type="text" name="plate" placeholder="License Plate" required>
+    <input type="text" name="plate" placeholder="License Plate" id="plate" required>
     <br/>
-    <input type="text" name="make" placeholder="Car Make" required>
+    <input type="text" name="make" placeholder="Car Make" id="make" required>
     <br/>
-    <input type="text" name="model" placeholder="Car Model" required>
+    <input type="text" name="model" placeholder="Car Model" id="model" required>
     <br/>
-    <input type="text" name="color" placeholder="Car Color" required>
+    <input type="text" name="color" placeholder="Car Color" id="color" required>
     <br/>
     <button type="submit">Add Car</button>
 </div>  

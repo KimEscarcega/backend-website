@@ -187,7 +187,8 @@ router.post('/confirm', bookingController.confirm);
 
 
 router.post('/addCar', accountController.addCar);
-
+router.delete('/deleteCar', accountController.deleteCar);
+router.get('/getAllCars', accountController.getAllCars);
 
 
 

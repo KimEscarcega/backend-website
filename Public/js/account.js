@@ -47,64 +47,98 @@ document.addEventListener('DOMContentLoaded', function () {
   const carForm = document.getElementById('carForm');
   const carList = document.getElementById('list');
 
-  carForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const plate = document.querySelector('input[name="plate"]').value;
-    const make = document.querySelector('input[name="make"]').value;
-    const model = document.querySelector('input[name="model"]').value;
-    const color = document.querySelector('input[name="color"]').value;
-
-    addCar(plate,make,model,color);
-    addCarToDatabase(plate, make, model, color);
-    carForm.reset();
-  });
-
-  function addCarToDatabase(plate, make, model, color) {
-    fetch('/addCar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ plate, make, model, color })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === "success") {
-        addCar(plate, make, model, color);
-      } else {
-        console.error('Error adding car:', data.error);
-      }
-    })
-    .catch(error => console.error('Error adding car:', error));
+  // Function to fetch and display user's cars when the page loads
+  function fetchAndDisplayCars() {
+      // Send an AJAX request to fetch user's cars from the server
+      fetch('/getAllCars', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          // Optionally, include authentication token or session information in the request headers
+      })
+      .then(response => response.json())
+      .then(data => {
+          // Display fetched cars
+          data.vehicle.forEach(vehicle => {
+              addCarToList(vehicle.plate, vehicle.make, vehicle.model, vehicle.color);
+          });
+      })
+      .catch(error => console.error('Error fetching cars:', error));
   }
 
-  function addCar(plate, make, model, color) {
-    const listItem = document.createElement('li');
-    listItem.innerHTML = `
-      <b>License Plate:</b> <span class='plate'>${plate}</span>,
-      <b>Car Make:</b> <span class='make'>${make}</span>,
-      <b>Car Model:</b> <span class='model'>${model}</span>,
-      <b>Car Color:</b> <span class='color'>${color}</span>
-      <button class='edit'>Edit</button>
-      <button class='remove'>Remove</button>`;
-    
-    carList.appendChild(listItem);
+  // Fetch and display user's cars when the page loads
+  fetchAndDisplayCars();
 
-    listItem.querySelector('.edit').addEventListener('click', function () {
-      const newPlate = prompt('Enter new license plate:', plate);
-      const newMake = prompt('Enter new car make:', make);
-      const newModel = prompt('Enter new car model:', model);
-      const newColor = prompt('Enter new car color:', color);
+  carForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const plate = document.querySelector('input[name="plate"]').value;
+      const make = document.querySelector('input[name="make"]').value;
+      const model = document.querySelector('input[name="model"]').value;
+      const color = document.querySelector('input[name="color"]').value;
 
-      listItem.querySelector('.plate').textContent = newPlate;
-      listItem.querySelector('.make').textContent = newMake;
-      listItem.querySelector('.model').textContent = newModel;
-      listItem.querySelector('.color').textContent = newColor;
-    });
+      if (plate && make && model && color) {
+          addCarToList(plate, make, model, color); // Add car to the list first
+          addCarToDatabase(plate, make, model, color); // Then add it to the database
+          carForm.reset();
+      } else {
+          console.error('Please enter all information.');
+      }
+  });
 
-    listItem.querySelector('.remove').addEventListener('click', function () {
-      listItem.remove();
-    });
+  function addCarToList(plate, make, model, color) {
+      const listItem = document.createElement('li');
+      listItem.innerHTML =
+          "<b>License Plate:</b> <span class='plate'>" + plate + "</span>, <b>Car Make:</b> <span class='make'>" + make
+          + "</span>, <b>Car Model:</b> <span class='model'>" + model + "</span>, <b>Car Color:</b> <span class='color'>"
+          + color + "</span> <button class='remove'>Remove</button>";
+      carList.appendChild(listItem);
+
+      listItem.querySelector('.remove').addEventListener('click', function () {
+          listItem.remove();
+          removeCarFromDatabase(plate); // Call the function to remove car from the database
+      });
+  }
+
+  function addCarToDatabase(plate, make, model, color) {
+      // Send an AJAX request to the server to add the car to the database
+      fetch('/addCar', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              plate: plate,
+              make: make,
+              model: model,
+              color: color
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data); // Log response data (optional)
+          // Optionally handle success/failure response
+      })
+      .catch(error => console.error('Error:', error)); // Log and handle errors
+  }
+
+  function removeCarFromDatabase(plate) {
+      // Send an AJAX request to the server to remove the car from the database
+      fetch('/deleteCar', {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              plate: plate
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          // Optionally handle success/failure response
+      })
+      .catch(error => console.error('Error:', error));
   }
 });
 
