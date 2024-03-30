@@ -17,7 +17,9 @@ const loggedController = require("../Controllers/Loggedin.js");
 const accountController = require("../Controllers/account.js");
 const feedbackController = require("../Controllers/feedback.js");
 const bookingController = require("../Controllers/booking.js");
-const parkinglotController = require("../Controllers/parkinglot.js");
+const parkinglotController = reqire("../Controllers/parkinglot.js");
+const currentController = require("../Controllers/current.js");
+
 
 
 //secret key ??(youtube)
@@ -113,7 +115,18 @@ const bookingrequest ={
 
 
 router.get("/current", (req,res)=>{
-    res.render("current");
+
+   
+
+    const lno = req.session.lot;
+    const date = req.session.date;
+    const timein = req.session.startTime;
+    const timeout = req.session.endTime;
+    const price = req.session.price;
+
+    res.render("current", {lot:lno, date:date, startTime:timein, endTime:timeout, price:price });
+
+
 });
 
 router.get("/future", (req,res)=>{

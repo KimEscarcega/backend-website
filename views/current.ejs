@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Current Bookings</title>
-    <link rel="stylesheet" href="styles/bookingstyle.css">
+    <link rel="stylesheet" href="css/bookingstyle.css">
 
     <link rel="icon" type="image/x-icon" href="Images/favicon.ico.png">
 </head>
@@ -34,14 +34,15 @@
 
           <main class="current-booking">
 
+
             
 
             <table>
 
                 <caption><strong>Current Bookings</strong></caption>
                
-                    <tr> <th>Date</th> <th>Time-In</th> <th>Time-Out</th> <th>Vehicle License Plate</th> <th>Payment Details</th> </tr>
-                    <tr> <td>x </td> <td> </td> <td> </td>         <td> </td>          <td> </td> </tr>
+                    <tr> <th>Lot</th><th>Date</th> <th>Time-In</th> <th>Time-Out</th> <th>Price</th> </tr>
+                    <tr> <td><%= lot %></td> <td><%= date %></td> <td><%=startTime %></td> <td><%=endTime %></td> <td><%= price %></td> </tr>
             </table>
             <br>
 
