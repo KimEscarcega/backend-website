@@ -68,13 +68,20 @@ router.get("/forgotpassword", (req,res)=>{
 
 //users information
 router.get("/account", (req,res)=>{
-    const firstname = req.session.firstname;
-    const email=req.session.email;
-    const phone=req.session.phone;
-    const uID=req.session.userId
-    res.render("account", {firstname: firstname,email:email,phone:phone,uID:uID});
+    
+    const userInfo = {
+
+       firstname:req.session.firstname,
+       lastname:req.session.lastname,
+        email: req.session.email,
+        phone: req.session.phone,
+        uID: req.session.userId,
+
+    }
+    res.render("account", {userInfo});
 
 });
+
 
 //reservations
 
