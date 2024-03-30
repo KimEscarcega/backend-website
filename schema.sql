@@ -5,7 +5,7 @@ create table user (uID int unsigned not null AUTO_INCREMENT,  firstN varchar(60)
 
 create table Payment( pID int unsigned not null , uID int unsigned , cardNo int , cardCVV int , cardExDate date );
 create table feedback(fID int unsigned not null auto_increment, uID int unsigned, fdate date, text varchar(150), primary key(fID), foreign key(uID) references user(uID) on update cascade);
-create table vehicle(vID int not null auto_increment, uID int unsigned, make varchar(60), model varchar(60), color varchar(60), plate varchar(60), primary key(vID), foreign key(uID) references user(uID) on update cascade);
+create table vehicle(vID int unsigned not null auto_increment, uID int unsigned, make varchar(60), model varchar(60), color varchar(60), plate varchar(60), primary key(vID), foreign key(uID) references user(uID) on update cascade);
 create table lot(lNo varchar(10) not null, location varchar(60), primary key(lNo));
 create table user_lot(uID int unsigned, lNo varchar(10), date date, timein time, timeout time, price decimal(4,2), primary key(lNo, date, timein, timeout), foreign key(uID) references user(uID) on update cascade on delete set null, foreign key(lNo) references lot(lNo) on update cascade);
 
