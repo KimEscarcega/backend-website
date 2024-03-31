@@ -109,32 +109,20 @@ const bookingrequest ={
 }
        
 
-   
-
-
     res.render("confirm",{bookingrequest});
 
 });
 
 
 
+//Booking Tab
+router.get("/current", currentController.current);
 
 
 
-router.get("/current", (req,res)=>{
-
-   
-
-    const lno = req.session.lot;
-    const date = req.session.date;
-    const timein = req.session.startTime;
-    const timeout = req.session.endTime;
-    const price = req.session.price;
-
-    res.render("current", {lot:lno, date:date, startTime:timein, endTime:timeout, price:price });
 
 
-});
+
 
 router.get("/future", (req,res)=>{
     res.render("future");
