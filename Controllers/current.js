@@ -1,42 +1,36 @@
-const database = require("../routes/db-config");
 const express = require('express');
 const router = express.Router();
-
+const database = require("../routes/db-config");
 
 exports.current = (req, res) => {
+    uID= req.session.userId;
+    console.log(uID);
+    console.log("getting current booking");
 
-    database.query('SELECT * FROM user_lot ORDER BY uID DESC LIMIT 1', (error, results) => {
-        if (error) {
-            console.error("Error retrieving current data:", error);
-            return res.status(500).send("Error retrieving current data");
+    database.query('select * from User_lot WHERE uID = ? order by date DESC LIMIT 1', [uID], (err, results) => {
+        if (err) {
+            throw err;
+            
         }
 
+        // Check if booking data exists
         if (results.length > 0) {
-            
-                const ID = results[0].uID;
-                const lot = results[0].lno;
-                const date =  results[0].date;
-                const startTime = results[0].timeIn;
-                const endTime = results[0].timeOut;
-                const price = results[0].price;
 
-                console.log(lot);
-                console.log(date);
-                console.log(startTime);
-                console.log(endTime);
-                console.log(price);
+            const CurrentBooking = {
+                        lot: results[0].lID,
+                        date: results[0].date,
+                        startTime: results[0].timein,
+                        endTime: results[0].timeout,
+                        price:results[0].price,
+                     };
 
-                req.session.lno = lot;
-                req.session.date = date;
-                req.session.timeIn = startTime;
-                req.session.timeIn = endTime;
-                req.session.price = price;
 
-                
-            }
+            return res.render("current", { uID: uID, CurrentBooking: CurrentBooking});
+        } else {
+         return res.render("current", { uID: uID, CurrentBooking: null });
+        }
+    });
+};
 
-            else { // if the information is wrong 
-                res.status(404).send("No data found in user_lot table");            }
-        } 
-        );
-    };
+
+      
