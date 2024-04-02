@@ -114,11 +114,12 @@ const bookingrequest ={
 });
 
 //booking pricing and confirmation
- router.get("/confirmation", (req,res)=>{
+
+    router.get("/confirmation", (req,res)=>{
 
 
         const bookingrequest ={
-            lot: req.session.lot,
+            lotnumber: req.session.lotnumber,
             appdate:req.session.appdate,
             startTime:req.session.startTime,
             endTime:req.session.endTime,
