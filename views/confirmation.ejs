@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
-    <link rel="stylesheet" href="/css/bookingstyle.css">
+    <link rel="stylesheet" href="./css/bookingstyle.css">
 
-    <link rel="icon" type="image/x-icon" href="/Images/favicon.ico.png">
+    <link rel="icon" type="image/x-icon" href="./Images/favicon.ico.png">
 </head>
 <body>
     <header>
@@ -15,28 +15,29 @@
 
            
              <ul>
-                <li><a href="/account">Account</a></li>
+                <li><a href="Account.html">Account</a></li>
                 <li class="dropdown">
-                    <a href="/booking" class="dropbtn">Reservation</a>
+                    <a href="booking.html" class="dropbtn">Reservation</a>
                     <div class="dropdown-content">
-                        <a href="/current">Current Reservation</a>
-                        <a href="/future">Future Reservation</a>
-                        <a href="/past">Past Reservation</a>
+                      <a href="#">Current Reservation</a>
+                      <a href="#">Future Reservation</a>
+                      <a href="#">Past Reservation</a>
                     </div>
                   </li>
 
-                <li><a href="/report">Report</a></li>
-                <li><a href="/feedback">Feedback</a></li>
-                <li><a href="/moreinfo">More Information</a></li>
+                <li><a href="report.html">Report</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="moreinfo.html">More Information</a></li>
             </ul>
 
             </header>
 
           <main>
+            <form id="confirmation" action="/confirmation" method="POST">
 
             <div class="one">
                 <h1>Reservation Confirmed!</h1>
-                <img src="/Images/untdallas.png" alt="Unt Dallas">
+                <img src="Images/untdallas.png" alt="Unt Dallas">
                 <address>7300 University Hills Blvd, Dallas, TX 75241</address>
             </div>
             
@@ -45,17 +46,17 @@
                 <p>Spot #<span id="spot"></span></p>
 
             </div>
-
-            <div class="three">
-
-                <p>Date: <span id="date"></span></p>
-
-                <p>Time: <span id="startTime"></span> - <span id="endTime"></span> </p><br><br>
-
-                <p>Total: <span id="price"></span></p>
-                
-
-            </div>
+            <div class="confirm-tags">
+              <p>Lot Number</p>
+              <p><b><%- bookingrequest.lot%></b></p>
+              <hr/>
+          
+              <p>Date: <%- bookingrequest.appdate %></p>
+              <p>Start: <%- bookingrequest.startTime %></p>
+              <p>End: <%- bookingrequest.endTime %></p>
+              <p>Total Price: <%- bookingrequest.totalPrice %></p>
+          </div>
+          
 
             <div class="buttons-confirmed">
                 
@@ -63,7 +64,7 @@
 
             </div>
 
-
+          </form>
         
           </main>
     <footer>
@@ -72,7 +73,7 @@
 
     </footer>
 
-    <script src="/js/booking.js"></script>
+    <script src="booking.js"></script>
     
     
 </body>
