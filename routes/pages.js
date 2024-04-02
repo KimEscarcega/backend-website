@@ -107,9 +107,8 @@ const bookingrequest ={
     endTime:req.session.endTime,
     
 }
-       
-
-    res.render("confirm",{bookingrequest});
+       console.log("Booking request from session:", bookingrequest);
+         res.redirect("/confirmation");
 
 });
 
