@@ -89,7 +89,7 @@ exports.confirmation = (req, res) => {
     const date = req.body.date;
     const startTime = req.body.startTime;
     const endTime = req.body.endTime;
-    // const uID = req.body.uID;
+    const uID = req.body.uID;
     const lot = req.body.lotnumber;
  
     req.session.lotnumber = lot;
