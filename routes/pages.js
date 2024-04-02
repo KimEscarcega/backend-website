@@ -17,8 +17,10 @@ const loggedController = require("../Controllers/Loggedin.js");
 const accountController = require("../Controllers/account.js");
 const feedbackController = require("../Controllers/feedback.js");
 const bookingController = require("../Controllers/booking.js");
-const parkinglotController = reqire("../Controllers/parkinglot.js");
+const parkinglotController = require("../Controllers/parkinglot.js");
 const currentController = require("../Controllers/current.js");
+const reportController = require("../Controllers/report.js");
+
 
 
 
@@ -165,6 +167,8 @@ router.get("/moreinfo", (req,res)=>{
 
 
 router.post("/feedback", feedbackController.feedback);
+
+router.post("/report", reportController.report);
 
 
 
