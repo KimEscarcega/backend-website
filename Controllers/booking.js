@@ -55,15 +55,44 @@ exports.confim=(req,res) =>{
     
 }
 
-//code for the pricing 
+exports.confirm = (req, res) => {
+    const date = req.body.date;
+    const startTime = req.body.startTime;
+    const endTime = req.body.endTime;
+    const uID = req.body.uID;
+    const lot = req.body.lotnumber;
+
+    req.session.lotnumber = lot;
+    req.session.appdate= date;
+    req.session.startTime=startTime;
+    req.session.endTime=endTime;
+
+    if (!date || !startTime || !endTime || !uID || !lot){
+        res.render("confirm", { 
+            bookingrequest: {
+                lot: req.session.lotnumber,
+                appdate: date,
+                startTime: startTime,
+                endTime: endTime,
+            } 
+        });
+
+    }
+    else{
+        res.redirect ("parkinglot");
+  } 
+    
+    
+};
+
 exports.confirmation = (req, res) => {
     const date = req.body.date;
     const startTime = req.body.startTime;
     const endTime = req.body.endTime;
     // const uID = req.body.uID;
-    const lot = req.body.lot;
+    const lot = req.body.lotnumber;
  
-    req.session.lot = lot;
+    req.session.lotnumber = lot;
     req.session.appdate = date;
     req.session.startTime = startTime;
     req.session.endTime = endTime;
@@ -72,7 +101,7 @@ exports.confirmation = (req, res) => {
     if (!date || !startTime || !endTime || !uID || !lot || totalPrice){
         res.render("confirmation", { 
             bookingrequest: {
-                lot: req.session.lot,
+                 lot: req.session.lotnumber,
                 appdate: date,
                 startTime: startTime,
                 endTime: endTime,
