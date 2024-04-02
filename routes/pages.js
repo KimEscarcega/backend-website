@@ -138,9 +138,9 @@ router.get("/past", (req,res)=>{
 
 //report
 
-router.get("/report", (req,res)=>{
-    res.render("report");
-});
+//router.get("/report", (req,res)=>{
+  //  res.render("report");
+//});
 
 
 
@@ -168,7 +168,7 @@ router.get("/moreinfo", (req,res)=>{
 
 router.post("/feedback", feedbackController.feedback);
 
-router.post("/report", reportController.report);
+//router.post("/report", reportController.report);
 
 
 
