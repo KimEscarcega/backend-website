@@ -109,12 +109,28 @@ const bookingrequest ={
     endTime:req.session.endTime,
     
 }
-       
-
-    res.render("confirm",{bookingrequest});
+       console.log("Booking request from session:", bookingrequest);
+         res.redirect("/confirmation");
 
 });
 
+//booking pricing and confirmation
+
+    router.get("/confirmation", (req,res)=>{
+
+
+        const bookingrequest ={
+            lotnumber: req.session.lotnumber,
+            appdate:req.session.appdate,
+            startTime:req.session.startTime,
+            endTime:req.session.endTime,
+            totalPrice:req.session.totalPrice
+
+            
+        }
+            res.render("confirmation",{bookingrequest: bookingrequest});
+        
+        });
 
 
 //Booking Tab
@@ -190,6 +206,7 @@ router.post('/login', (req, res) => {
 router.post('/booking', bookingController.bookingform);
 router.post('/parkinglot', bookingController.lot);
 router.post('/confirm', bookingController.confirm);
+ router.post('/confirmation', bookingController.confirmation);
 
 
 
