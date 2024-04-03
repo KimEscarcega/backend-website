@@ -47,31 +47,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const carForm = document.getElementById('carForm');
     const carList = document.getElementById('list');
     
+    // Fetch and display user's cars when the page loads
+    fetchAndDisplayCars();
 
-    // Function to fetch and display user's cars when the page loads
+    // Function to fetch and display user's cars
     function fetchAndDisplayCars() {
-        // Send an AJAX request to fetch user's cars from the server
+      
+        
         fetch('/getAllCars', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
-            },
-            // Optionally, include authentication token or session information in the request headers
+                'Content-Type': 'application/json',
+
+            }, 
+       
         })
         .then(response => response.json())
         .then(data => {
-            // Display fetched cars
-            data.vehicle.forEach(vehicle => {
-                
-                addCarToList(vehicle.plate, vehicle.make, vehicle.model, vehicle.color);
-                
-            });
+            if (data && data.vehicle && data.vehicle.length > 0) {
+                data.vehicle.forEach(vehicle => {
+                    addCarToList(vehicle.plate, vehicle.make, vehicle.model, vehicle.color);
+                });
+            } else {
+                console.log('No cars found for the user');
+            }
         })
         .catch(error => console.error('Error fetching cars:', error));
     }
-
-    // Fetch and display user's cars when the page loads
-    fetchAndDisplayCars();
 
     carForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -80,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const model = document.querySelector('input[name="model"]').value;
         const color = document.querySelector('input[name="color"]').value;
      
-
         if (plate && make && model && color) {
             addCarToList(plate, make, model, color); // Add car to the list first
             addCarToDatabase(plate, make, model, color); // Then add it to the database
@@ -105,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function addCarToDatabase(plate, make, model, color) {
-        // Send an AJAX request to the server to add the car to the database
         const uID = document.getElementById('uID').value; // Retrieve user's ID from HTML element
         fetch('/addCar', {
             method: 'POST',
@@ -118,19 +118,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 model: model,
                 color: color,
                 uID:uID
-                
             })
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data); // Log response data (optional)
-            // Optionally handle success/failure response
+            console.log(data); 
         })
         .catch(error => console.error('Error:', error)); // Log and handle errors
     }
 
     function removeCarFromDatabase(plate) {
-        // Send an AJAX request to the server to remove the car from the database
+        // Send an AJAX request to the server 
         fetch('/deleteCar', {
             method: 'DELETE',
             headers: {
@@ -143,14 +141,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            // Optionally handle success/failure response
+           
         })
         .catch(error => console.error('Error:', error));
     }
 });
-
-
-  
 
 
 
@@ -160,44 +155,104 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* Add debit/credit card */
 document.addEventListener('DOMContentLoaded', function () {
-  const cardForm = document.getElementById('CardForm');
-  const cardList = document.getElementById('CardList');
+    const cardForm = document.getElementById('cardForm');
+    const cardList = document.getElementById('lists');
 
-  cardForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const DebitCreditCard = document.getElementById('DCC').value;
-    const MMYY = document.getElementById('DCCDate').value;
-    const CVV = document.getElementById('CVV').value;
-    const ZipCode = document.getElementById('Zip').value;
-    
-    addCard(DebitCreditCard, MMYY, CVV, ZipCode);
-    cardForm.reset();
-  });
+    // Fetch and display user's cards when the page loads
+    fetchAndDisplayCards();
 
-  function addCard(DebitCreditCard, MMYY, CVV, ZipCode) {
-    const listItem = document.createElement('li');
-    listItem.innerHTML = 
-    "<b>Debit Card:</b> <span class='DCC'>" + DebitCreditCard + "</span>" + ", <b>Experation Date:</b> <span class='DCCDate'>" + MMYY +  "</span>, <b>CVV:</b> <span class='CVV'>" + CVV + "</span>" +
-    ", <b>Zip Code:</b> <span class='Zip'>" + ZipCode + "</span>" +  " <button class='edit'>Edit</button>" +
-    " <button class='remove'>Remove</button>";
-    cardList.appendChild(listItem);
+    cardForm.addEventListener('submit', function (event) {
+        event.preventDefault(); 
+        const cardNo = document.querySelector('input[name="cardNo"]').value;
+        const cardCVV = document.querySelector('input[name="cardCVV"]').value;
+        const cardExDate = document.querySelector('input[name="cardExDate"]').value;
+        const zipCode = document.querySelector('input[name="zipCode"]').value;
 
-    listItem.querySelector('.edit').addEventListener('click', function () {
-      const newDebitCreditCard = prompt('Enter new Debit/Credit Card number:', DebitCreditCard);
-      const newMMYY = prompt('Enter new experation date:',MMYY);
-      const newCVV = prompt('Enter new CVV', CVV);
-      const newZip =prompt('Enter new zip code:', ZipCode);
-      
-
-      listItem.querySelector('.DCC').textContent=newDebitCreditCard;
-      listItem.querySelector('.DCCDate').textContent=newMMYY;
-      listItem.querySelector('.CVV').textContent=newCVV;
-      listItem.querySelector('.Zip').textContent=newZip;
-
+        if (cardNo && cardCVV && cardExDate && zipCode) {
+            addCardToDatabase(cardNo, cardCVV, cardExDate, zipCode); // Submit the form asynchronously
+            cardForm.reset();
+        } else {
+            console.error('Please enter all information.');
+        }
     });
 
-    listItem.querySelector('.remove').addEventListener('click', function () {
-      listItem.remove();
-    });
-  }
+    function addCardToDatabase(cardNo, cardCVV, cardExDate, zipCode) {
+        const uID = document.getElementById('uID').value; // Retrieve user's ID from HTML
+
+        fetch('/addCard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cardNo: cardNo,
+                cardCVV: cardCVV,
+                cardExDate: cardExDate,
+                zipCode: zipCode,
+                uID: uID
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.error('Error:', error)); // Log and handle errors
+    }
+
+    // Fetch and display user's cards info
+    function fetchAndDisplayCards() {
+        // Fetch user's cards from the server
+        fetch('/getAllCards', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display fetched cards
+            data.payment.forEach(payment => {
+                addCardToList(payment.cardNo, payment.cardCVV, payment.cardExDate, payment.zipCode);
+            });
+        })
+        .catch(error => console.error('Error fetching cards:', error));
+    }
+
+    // Function to add card to the list
+    function addCardToList(cardNo, cardCVV, cardExDate, zipCode) {
+        const listItems = document.createElement('li');
+        listItems.innerHTML =
+            "<b>Debit/Credit Card #:</b> <span class='No'>" + cardNo + "</span>, <b>Date:</b> <span class='ExDate'>" + cardExDate
+            + "</span>, <b>CVV:</b> <span class='cvv'>" + cardCVV + "</span>, <b>Zip Code:</b> <span class='zip'>"
+            + zipCode + "</span> <button class='remove'>Remove</button>";
+        cardList.appendChild(listItems);
+
+        listItems.querySelector('.remove').addEventListener('click', function () {
+            listItems.remove();
+            removeCardFromDatabase(cardNo); // Call the function to remove cardNo from the database
+        });
+    }
+
+    // Function to remove card from the database
+    function removeCardFromDatabase(cardNo) {
+        fetch('/deleteCard', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cardNo: cardNo
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // Optionally handle success/failure response
+        })
+        .catch(error => console.error('Error:', error));
+    }
 });
+
+
+
+

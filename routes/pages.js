@@ -215,9 +215,16 @@ router.post('/confirm', bookingController.confirm);
 
 
 
+//car info
 router.post('/addCar', accountController.addCar);
 router.delete('/deleteCar', accountController.deleteCar);
 router.get('/getAllCars', accountController.getAllCars);
+
+//cardinfo
+router.post('/addCard', accountController.addCard);
+router.delete('/deleteCard', accountController.deleteCard);
+router.get('/getAllCards', accountController.getAllCards);
+
 
 
 
