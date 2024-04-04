@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Past Bookings</title>
-    <link rel="stylesheet" href="styles/bookingstyle.css">
+    <link rel="stylesheet" href="css/bookingstyle.css">
 
     <link rel="icon" type="image/x-icon" href="Images/favicon.ico.png">
 </head>
@@ -32,20 +32,40 @@
 
             </header>
 
-          <main class="future-booking">
+            <main class="past-booking">
 
-            
-
-            <table>
-
-                <caption><strong>Past Bookings</strong></caption>
-               
-                    <tr> <th>Date</th> <th>Time-In</th> <th>Time-Out</th> <th>Vehicle License Plate</th> <th>Payment Details</th> </tr>
-                    <tr> <td>x </td> <td> </td> <td> </td>         <td> </td>          <td> </td> </tr>
-            </table>
-            <br>
-
-          </main>
+              <h2>Past Bookings</h2>
+  
+              
+  
+              <table>
+  
+                <thead>
+                  <tr> 
+                      <th>Lot</th><th>Date</th><th>Time-In</th><th>Time-Out</th><th>Price</th> 
+                  </tr>
+              </thead>
+              <tbody>
+                <% if (pastBooking.length > 0) { %>
+  
+                  <% pastBooking.forEach(function(past) { %>
+                      <tr> 
+                          <td><%= past.lot %></td>
+                          <td><%= past.date %></td>
+                          <td><%= past.startTime %></td>
+                          <td><%= past.endTime %></td>
+                          <td><%= past.price %></td>
+                      </tr>
+                  <% }); %>
+  
+                  <% } else { %>
+                    <tr><td colspan="5" class="error-msg">No past Bookings</td></tr>               
+                     <% } %>
+              </tbody>
+              </table>
+              <br>
+  
+            </main>
     <footer>
         
             <p>Created by Group 4 </p> 

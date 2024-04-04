@@ -5,15 +5,15 @@ const database = require("../routes/db-config");
 const crypto = require("crypto");
 const asyncHandler = require("express-async-handler");
 const nodemailer = require("nodemailer");
-
+const jwt = require("jsonwebtoken");
 
 
 
 // SQL queries used for password reset
 const q = "SELECT * FROM user WHERE uEmail = ?";
-const w = "DELETE FROM password_resets WHERE uEmail = ?";
-const e = "INSERT INTO password_resets (uEmail, token, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 15 MINUTE))";
-const t = "SELECT * FROM password_resets WHERE uEmail = ? AND token = ? AND expires_at > NOW()";
+const w = "DELETE FROM password_resets WHERE email = ?";
+const e = "INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 15 MINUTE))";
+const t = "SELECT * FROM password_resets WHERE email = ? AND token = ? AND expires_at > NOW()";
 const r = "UPDATE user SET uPassword = ? WHERE uEmail = ?";
 
 
@@ -96,7 +96,7 @@ exports.HandleResetPassword = asyncHandler(async (req, res) => {
       token: token  // Pass token back to the template for rendering
     });
   }
-    // Check if email, newPassword, and token are provided
+    // ERROR HERE
     if (!email || !NewPassword || !token) {
         return res.status(400).json({ error: 'Email, newPassword, and token needed.' });
     }

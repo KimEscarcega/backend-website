@@ -307,12 +307,10 @@ body{
           margin-top:10px;
         }
     
-        .container #CardList #CardListt{
+        .container #CardList #lists{
           list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background-color:lightblue;
         }
-
-        

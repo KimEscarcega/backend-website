@@ -10,148 +10,102 @@ exports.booking = (req, res) => {
 
 
 exports.bookingform = (req, res) => {
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const uID = req.body.uID;
-
     
-    if (!date || !startTime || !endTime || !uID) {
-        return res.render("booking");
-    }
+        const date = req.body.date;
+        const startTime = req.body.startTime;
+        const endTime = req.body.endTime;
+        const uID = req.body.uID;
 
-    // Calculate the total price
+
+
+          // Calculate the total price
     const startDate = new Date(`${date}T${startTime}`);
     const endDate = new Date(`${date}T${endTime}`);
 
     // this will calculate in milliseconds
     const durationMs = endDate - startDate;
-    const durationMinutes = durationMs / (1000 * 60);
-
-    // price of 15 mins for 0.45 cents
-    const pricePer15Minutes = 0.45;
-    const totalPrice = (durationMinutes / 15) * pricePer15Minutes;
-
-    //sessions
-    req.session.appdate = date;
-    req.session.startTime = startTime;
-    req.session.endTime = endTime;
-    req.session.totalPrice = totalPrice;
-
-    // Redirect to the parking lot page
-    res.redirect("/parkinglot");
-};
-
-
-exports.lot = (req,res) =>{
-    const lot = req.body.spot;
-
-    req.session.lotnumber= lot;
-
-
-    console.log("user selected Parking spot: ", lot);
-    res.redirect('/confirm');
-    
-};
-
-exports.confim=(req,res) =>{
-    
-}
-
-exports.confirm = (req, res) => {
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const uID = req.body.uID;
-    const lot = req.body.lotnumber;
-
-    req.session.lotnumber = lot;
-    req.session.appdate= date;
-    req.session.startTime=startTime;
-    req.session.endTime=endTime;
-
-    if (!date || !startTime || !endTime || !uID || !lot){
-        res.render("confirm", { 
-            bookingrequest: {
-                lot: req.session.lotnumber,
-                appdate: date,
-                startTime: startTime,
-                endTime: endTime,
-            } 
-        });
-
-    }
-    else{
-        res.redirect ("parkinglot");
-  } 
-    
-    
-};
-
-exports.confirmation = (req, res) => {
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const uID = req.body.uID;
-    const lot = req.body.lotnumber;
-
-    // Calculate date and time as a string
-    const startDate = new Date(`${date}T${startTime}`);
-    const endDate = new Date(`${date}T${endTime}`);
-
-    // this will calculate in milliseconds
-    const durationMs = endDate - startDate;
-
-    // from milliseconds to minutes
-    const durationMinutes = durationMs / (1000 * 60);
-
-     // price of 15 mins for 0.45 cents
-    const pricePer15Minutes = 0.45;
-    const totalPrice = (durationMinutes / 15) * pricePer15Minutes;
-
-    req.session.lotnumber = lot;
-    req.session.appdate = date;
-    req.session.startTime = startTime;
-    req.session.endTime = endTime;
-    req.session.totalPrice = totalPrice;
-
-    if (!date || !startTime || !endTime || !uID || !lot || !totalPrice) {
-        res.render("confirmation", {
-            bookingrequest: {
-                lot: req.session.lotnumber,
-                appdate: date,
-                startTime: startTime,
-                endTime: endTime,
-                totalPrice: totalPrice.toFixed(2)
-            }
-        });
-    }
-};
-    
-    //calculate start and endtime as a string
-    const startDate = new Date(`${date}T${startTime}`);
-    const endDate = new Date(`${date}T${endTime}`);
-
-    // this will calculate in milliseconds
-    const durationMs = endDate - startDate;
-
-    // from milliseconds to minutes
     const durationMinutes = durationMs / (1000 * 60);
 
     // price of 15 mins for 0.45 cents
     const pricePer15Minutes = 0.45;
     const price = (durationMinutes / 15) * pricePer15Minutes;
 
-    console.log("Received data for confirmation:");
-    console.log("Lot Num:", lot);
-    console.log("App Date:", date);
-    console.log("Start Time:", startTime);
-    console.log("End Time:", endTime);
-    console.log("Duration (minutes):", durationMinutes);
-    console.log("Price:", price);
+    //sessions
+    req.session.appdate = date;
+    req.session.startTime = startTime;
+    req.session.endTime = endTime;
+    req.session.price = price;
 
-  
+
+
+        if (!date || !startTime || !endTime || !uID){
+            res.redirect("/booking");
+
+        }else{
+            res.redirect ("/parkinglot");
+
+            
+        
+
+      } 
 };
- 
+
+
+
+// getting a parking lot 
+
+exports.lot = (req,res) =>{
+    const lot = req.body.spot;
+
+    req.session.lotnumber= lot;
+
+    if (!lot){
+        console.log("user was not able to select parkinglot Number ");
+    }
+
+
+    console.log("user selected Parking spot: ", lot);
+
+    res.redirect('/confirm');
+    
+};
+
+
+
+exports.confirmation = (req, res) =>{
+
+    uID= req.session.userId;
+    lot = req.session.lotnumber;
+    date= req.session.appdate;
+    startTime=req.session.startTime;
+    endTime=req.session.endTime;
+    price=req.session.price;
+
+    console.log(uID);
+
+
+
+    
+// select * from user_lot 
+// WHERE lID = ? AND date = ? 
+// AND ((timein <= ? AND timeout >= ?) OR (timein >= ? AND timeout <= ?) OR (timein <= ? AND timeout >= ?))
+
+
+
+
+    database.query(`INSERT INTO user_lot (uID, lID, date, timein, timeout, price) VALUES (?, ?, ?, ?, ?,?)`, [uID,lot, date, startTime, endTime,price],
+                    (error, results) => {
+                        if (error) {
+                            res.redirect("/notavailable");
+                        } else {
+
+
+
+                            res.redirect("/confirmation");
+                        }
+                    }
+                );
+
+}
 
 

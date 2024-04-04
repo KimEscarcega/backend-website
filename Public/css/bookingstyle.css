@@ -425,14 +425,16 @@ header img[src="/Images/logo.PNG"]{
     background-color: rgba(39, 89, 150, 0.5);
 }
 
-/* current booking */
 
-.current-booking caption{
+.current-booking h2, .future-booking h2, .past-booking h2{
   text-align: center;
   font-size: 30px;
   margin-bottom: 30px;
   margin-top: 30px;
 }
+
+
+
 
 .current-booking table, .current-booking th, .current-booking td{
   margin-left: auto;
@@ -442,15 +444,6 @@ header img[src="/Images/logo.PNG"]{
   border-collapse: collapse;
   margin-bottom: 50px;
   border-width: 1px;
-}
-
-/* future reservations */
-
-.future-booking caption{
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
-  margin-top: 30px;
 }
 
 .future-booking table, .future-booking th, .future-booking td{
@@ -463,14 +456,6 @@ header img[src="/Images/logo.PNG"]{
   border-width: 1px;
 }
 
-/* past reservations */
-
-.past-booking caption{
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
-  margin-top: 30px;
-}
 
 .past-booking table, .past-booking th, .past-booking td{
   margin-left: auto;
@@ -480,4 +465,8 @@ header img[src="/Images/logo.PNG"]{
   border-collapse: collapse;
   margin-bottom: 50px;
   border-width: 1px;
+}
+
+.error-msg{
+  text-align: center;
 }
