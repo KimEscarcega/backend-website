@@ -36,33 +36,56 @@
 
           <main>
 
-            <section class="instructions">
 
-                <h3>Upload a picture that includes:</h3>
-                    
-                    <p>1.  Spot number</p>
-                    <p>2.  License plate of unauthorized car</p>
-                    
+            <h1>Report</h1>
+
+            <div class="instructions">
+            <p>Please enter all information to report an unauthorized vehicle in your assigned spot.</p>
+            </div>
+
+            <form id="reportForm" action="/report" method="POST">
+
+                <input id="uID" type="hidden" name="uID" value= "<%=reportInfo.userId%>">
+
+            <div id="reportInput">
+                <label>Enter the date: </label>
+                <input name="reportDate" type="date" required min="">
+            </div>
+
+            <div id="reportInput">
+                <label>Enter your confirmed <b>start</b> time: </label>
+                <input name="reportConfirmedStartTime" type="time" required min="">
+            </div>
+
+            <div id="reportInput">
+                <label>Enter your confirmed <b>end</b> time: </label>
+                <input name="reportConfirmedEndTime" type="time" required min="">
+            </div>
+
+            <div id="reportInput">
+                <label>Enter the time your spot was occupied by an unauthorized vehicle: </label>
+                <input name="reportOccupiedTime" type="time" required min="">
+            </div>
+
+            <div id="reportInput">
+                <label>Enter your assigned spot number: </label>
+                <input name="reportSpot" type="text" required min="">
+            </div>
+
+            <div id="reportInput">
+                <label>Enter the license plate of the unauthorized vehicle: </label>
+                <input name="reportLicense" type="text" required min="">
+            </div>
+
+
+            <div class="buttons">
                 
-
-            </section>
-
-            <section class="choosefilebtn">
-
-                <input type="file">
-
-
-            </section>
-
-
-                <div class="buttons">
-                
-                    <div><button class="cancel"><a href="#">Cancel</a></button></div>
-                    <div><input type="button" class="cnfm" value="Confirm"></div>
+                <div><button id="cancel"><a href="/main">Cancel</a></button></div>
+                <div><input type="submit" class="cnfm"></div>
     
-                </div>
+            </div>
 
-            
+            </form>
 
            
 

@@ -16,7 +16,7 @@ const loginController = require('../Controllers/login.js');
 const loggedController = require("../Controllers/Loggedin.js");
 const accountController = require("../Controllers/account.js");
 const feedbackController = require("../Controllers/feedback.js");
-const bookingController = require("../Controllers/booking.js");
+//const bookingController = require("../Controllers/booking.js");
 const parkinglotController = require("../Controllers/parkinglot.js");
 const currentController = require("../Controllers/current.js");
 const reportController = require("../Controllers/report.js");
@@ -154,9 +154,23 @@ router.get("/past", (req,res)=>{
 
 //report
 
-//router.get("/report", (req,res)=>{
-  //  res.render("report");
-//});
+router.get("/report", (req,res)=>{
+
+    const reportInfo = {
+
+         id:req.session.userId,
+         /*d:req.session.reportDate,
+         st: req.session.reportConfirmedStartTime,
+         et: req.session.reportConfirmedEndTime,
+         ot: req.session.reportOccupiedTime,
+         s: req.session.reportSpot,
+         l: req.session.reportLicense,*/
+ 
+     }
+     res.render("report", {reportInfo});
+});
+
+
 
 
 
@@ -184,7 +198,7 @@ router.get("/moreinfo", (req,res)=>{
 
 router.post("/feedback", feedbackController.feedback);
 
-//router.post("/report", reportController.report);
+router.post("/report", reportController.report);
 
 
 
@@ -203,10 +217,10 @@ router.post('/login', (req, res) => {
 
 
 //booking
-router.post('/booking', bookingController.bookingform);
-router.post('/parkinglot', bookingController.lot);
-router.post('/confirm', bookingController.confirm);
- router.post('/confirmation', bookingController.confirmation);
+//router.post('/booking', bookingController.bookingform);
+//router.post('/parkinglot', bookingController.lot);
+//router.post('/confirm', bookingController.confirm);
+ //router.post('/confirmation', bookingController.confirmation);
 
 
 

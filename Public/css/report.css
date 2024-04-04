@@ -87,8 +87,6 @@ header{
   width: auto;
 }
     
-    
-
 
 header h1{ 
     
@@ -131,24 +129,30 @@ body{
 
     }
 
-    .instructions h3{
+    h1{
       text-align: center;
-      margin-bottom: 50px;
-      
+
     }
+
+    #reportInput{
+      margin-left: auto;
+      margin-right: auto;
+    
+      width: 50%;
+      padding-bottom: 10px;
+    }
+    
+
     .instructions p {
       margin-left: auto;
       margin-right: auto;
-      width: 25%;
-      
-      
+      width: 40%;
+      text-align: center;
+      font-weight: bold;
+      padding-bottom: 40px;
     }
 
-    .choosefilebtn{
-      text-align: center;
-      margin-top: 50px;
-      
-    }
+
 
     .buttons{
         display: flex;
@@ -175,13 +179,13 @@ body{
        
     }
 
-    .cancel{
+    #cancel{
         background-color: rgb(211, 67, 67);
         margin: 20px;
       margin-left: -10%;
     }
 
-    .cancel:hover{
+    #cancel:hover{
         background-color: rgba(211, 67, 67, 0.5);
     }
 
@@ -196,11 +200,11 @@ body{
     }
 
 
-    .cancel a:visited{
+    #cancel a:visited{
         text-decoration: none;
         color: rgb(255, 255, 255);
     }
 
-    .cancel a{
+    #cancel a{
         text-decoration: none;
     }
