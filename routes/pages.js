@@ -148,9 +148,23 @@ router.get("/past", pastController.past);
 
 //report
 
-//router.get("/report", (req,res)=>{
-  //  res.render("report");
-//});
+router.get("/report", (req,res)=>{
+
+    const reportInfo = {
+
+         id:req.session.userId,
+         /*d:req.session.reportDate,
+         st: req.session.reportConfirmedStartTime,
+         et: req.session.reportConfirmedEndTime,
+         ot: req.session.reportOccupiedTime,
+         s: req.session.reportSpot,
+         l: req.session.reportLicense,*/
+ 
+     }
+     res.render("report", {reportInfo});
+});
+
+
 
 
 
@@ -178,7 +192,7 @@ router.get("/moreinfo", (req,res)=>{
 
 router.post("/feedback", feedbackController.feedback);
 
-//router.post("/report", reportController.report);
+router.post("/report", reportController.report);
 
 
 
@@ -199,8 +213,8 @@ router.post('/login', (req, res) => {
 //booking
 router.post('/booking', bookingController.bookingform);
 router.post('/parkinglot', bookingController.lot);
-router.post('/confirm', bookingController.confirm);
- router.post('/confirmation', bookingController.confirmation);
+//router.post('/confirm', bookingController.confirm);
+router.post('/confirmation', bookingController.confirmation);
 
 
 
