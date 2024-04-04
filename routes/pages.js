@@ -149,28 +149,18 @@ router.get("/past", pastController.past);
 //report
 
 router.get("/report", (req,res)=>{
-
-    const reportInfo = {
-
-         id:req.session.userId,
-         /*d:req.session.reportDate,
-         st: req.session.reportConfirmedStartTime,
-         et: req.session.reportConfirmedEndTime,
-         ot: req.session.reportOccupiedTime,
-         s: req.session.reportSpot,
-         l: req.session.reportLicense,*/
- 
-     }
-     res.render("report", {reportInfo});
+        const uID = req.session.userId;
+     res.render("report", {uID:uID});
 });
 
 
 
 
 
-
+//feedback
 router.get("/feedback", (req,res)=>{
-   res.render("feedback");
+    const uID = req.session.userId;
+   res.render("feedback", {uID:uID});
 });
 
 
