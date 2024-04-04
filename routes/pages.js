@@ -20,6 +20,8 @@ const bookingController = require("../Controllers/booking.js");
 const parkinglotController = require("../Controllers/parkinglot.js");
 const currentController = require("../Controllers/current.js");
 const reportController = require("../Controllers/report.js");
+const futureController = require("../Controllers/future.js");
+const pastController = require("../Controllers/past.js");
 
 
 
@@ -137,18 +139,10 @@ const bookingrequest ={
 router.get("/current", currentController.current);
 
 
+router.get("/future", futureController.future);
 
 
-
-
-
-router.get("/future", (req,res)=>{
-    res.render("future");
-});
-
-router.get("/past", (req,res)=>{
-    res.render("past");
-});
+router.get("/past", pastController.past);
 
 
 
