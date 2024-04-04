@@ -16,7 +16,7 @@ const loginController = require('../Controllers/login.js');
 const loggedController = require("../Controllers/Loggedin.js");
 const accountController = require("../Controllers/account.js");
 const feedbackController = require("../Controllers/feedback.js");
-//const bookingController = require("../Controllers/booking.js");
+const bookingController = require("../Controllers/booking.js");
 const parkinglotController = require("../Controllers/parkinglot.js");
 const currentController = require("../Controllers/current.js");
 const reportController = require("../Controllers/report.js");
@@ -211,10 +211,10 @@ router.post('/login', (req, res) => {
 
 
 //booking
-//router.post('/booking', bookingController.bookingform);
-//router.post('/parkinglot', bookingController.lot);
+router.post('/booking', bookingController.bookingform);
+router.post('/parkinglot', bookingController.lot);
 //router.post('/confirm', bookingController.confirm);
- //router.post('/confirmation', bookingController.confirmation);
+router.post('/confirmation', bookingController.confirmation);
 
 
 
