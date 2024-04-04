@@ -7,7 +7,7 @@ exports.future = (req, res) => {
     console.log(uID);
     console.log("getting future bookings");
 
-    database.query('SELECT * FROM User_lot WHERE uID = ? AND date > NOW() ORDER BY date DESC', [uID], (err, results) => {
+    database.query('SELECT * FROM User_lot WHERE uID = ? AND date > NOW() ORDER BY date ASC', [uID], (err, results) => {
         if (err) {
             throw err;
         }
