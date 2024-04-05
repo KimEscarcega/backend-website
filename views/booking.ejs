@@ -20,8 +20,7 @@
                 <li class="dropdown">
                     <a href="/booking" class="dropbtn">Reservation</a>
                     <div class="dropdown-content">
-                      <a href="/current">Current Reservation</a>
-                      <a href="/future">Future Reservation</a>
+                      <a href="/future">Reservations</a>
                       <a href="/past">Past Reservation</a>
                     </div>
                   </li>
@@ -29,6 +28,7 @@
                 <li><a href="/report">Report</a></li>
                 <li><a href="/feedback">Feedback</a></li>
                 <li><a href="/moreinfo">More Information</a></li>
+                <li class="logoutbtn"><a href="/login">Logout</a></li>
             </ul>
 
             </header>
@@ -74,13 +74,11 @@
 
             </div>
 
-            <input id="uID" type="hidden" name="uID" value= "<%=uID%>">
 
 
             <div class="buttons">
 
-              <input type="reset" class="cncl" value="cancel">
-              <input type="submit" onclick="calculateParkingPrice" value="confirm" class="cnfm">                
+              <input type="submit" value="confirm" class="cnfm">                
             </div>
 
             </form>
