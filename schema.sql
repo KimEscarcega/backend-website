@@ -3,7 +3,7 @@ use SPdemo
 
 create table user (uID int unsigned not null AUTO_INCREMENT,  firstN varchar(60), lastN varchar (60), uEmail varchar(60) UNIQUE, uPassword varchar(60), uPhone varchar(10) UNIQUE, primary key(uID));
 
-create table payment( pID int unsigned not null , uID int unsigned , cardNo varchar(16) , cardCVV int , cardExDate varchar(4),primary key(pID),foreign key(uID)references user(uID) );
+create table payment( pID int unsigned not null , uID int unsigned , cardNo varchar(16) , cardCVV int , cardExDate varchar(4),zipCode int, primary key(pID),foreign key(uID)references user(uID) );
 create table feedback(fID int unsigned not null auto_increment, uID int unsigned, fdate date, text varchar(150), primary key(fID), foreign key(uID) references user(uID) on update cascade);
 create table report(rID int unsigned not null auto_increment, uID int unsigned, rdate date, rconfirmedStartTime time, rconfirmedEndTime time, roccupiedTime time, rspot varchar(15), rlicense varchar(15), primary key(rID), foreign key(uID) references user(uID) on update cascade);
 create table vehicle(vID int unsigned not null auto_increment, uID int unsigned, make varchar(60), model varchar(60), color varchar(60), plate varchar(60), primary key(vID), foreign key(uID) references user(uID) on update cascade);
