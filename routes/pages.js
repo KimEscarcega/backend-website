@@ -62,9 +62,25 @@ router.get("/main", (req,res) =>{
 });
 
 
-router.get("/forgotpassword", (req,res)=>{
-    res.render("forgotpassword");
+//routes for forgot and reset password
+router.get("/forgotPassword", (req, res) => {
+    res.render("forgotten_password", {
+        title: 'Forgotten Password'
+    });
 });
+
+router.get("/resetPassword/:token/:email", (req, res) => {
+    const token = req.params.token;
+    const email = req.params.email;
+    console.log(req);
+    res.render("reset_password", {
+        title: 'Reset Password',
+        errors: undefined,
+        email: email, // Pass email back to the template for rendering
+        token: token
+    });
+});
+
 
 
 
@@ -149,28 +165,18 @@ router.get("/past", pastController.past);
 //report
 
 router.get("/report", (req,res)=>{
-
-    const reportInfo = {
-
-         id:req.session.userId,
-         /*d:req.session.reportDate,
-         st: req.session.reportConfirmedStartTime,
-         et: req.session.reportConfirmedEndTime,
-         ot: req.session.reportOccupiedTime,
-         s: req.session.reportSpot,
-         l: req.session.reportLicense,*/
- 
-     }
-     res.render("report", {reportInfo});
+        const uID = req.session.userId;
+     res.render("report", {uID:uID});
 });
 
 
 
 
 
-
+//feedback
 router.get("/feedback", (req,res)=>{
-   res.render("feedback");
+    const uID = req.session.userId;
+   res.render("feedback", {uID:uID});
 });
 
 
@@ -236,8 +242,10 @@ router.get('/getAllCards', accountController.getAllCards);
 
 
 
-
+//post methods for the forgot and reset
 router.post("/forgotPassword", authController.HandleforgottenPassword);
+router.post("/resetPassword/:token/:email", authController.HandleResetPassword);
+
 
 router.get("/resetPassword", (req, res) => {
     res.render("reset_password", {

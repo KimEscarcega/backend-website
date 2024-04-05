@@ -46,6 +46,8 @@
                
     
             <form id="feedbackform" method="POST" action="/feedback">
+                <input id="uID" type="hidden" name="uID" value= "<%=uID%>">
+
                 <div id="fbDate"> 
                     <label>Enter today's date: </label>
                     <input name="feedbackDate" type="date" required min="">

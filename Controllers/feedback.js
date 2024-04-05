@@ -7,17 +7,20 @@ exports.feedback = (req, res)=>{
   
   const d = req.body.feedbackDate;
   const r = req.body.reviewtxt;
+  const uID = req.session.userId;
+
+  console.log(uID);
 
 
   console.log("Received report data:", req.body); //views data input in console log
 
-  if(!d || !r){
+  if(!uID || !d || !r){
 
-    return res.json(alert("Please enter all required information"));   //if the user doesnt enter all info
+    return res.json({ status: "error", error: "Please enter ALL information" });   //if the user doesnt enter all info
 
   }else{
 
-    database.query("insert into feedback (fdate, text) values (?, ?)", [d, r],  //inserting into database
+    database.query("insert into feedback (uID, fdate, text) values (?, ?, ?)", [uID, d, r],  //inserting into database
   
     (error, results) => {
       if (error) {
@@ -34,13 +37,3 @@ exports.feedback = (req, res)=>{
 
 
     
-
-
-   
-
-        
-  
-
-
-
-
