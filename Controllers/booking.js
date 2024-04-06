@@ -91,6 +91,7 @@ exports.lot = (req,res) =>{
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 exports.confirmation = (req, res) => {
     const uID = req.session.userId;
     const lot = req.session.lotnumber;
@@ -109,15 +110,37 @@ exports.confirmation = (req, res) => {
                     // Spot is already booked
                     res.redirect("/notavailable");
                 } else {
-                    // proceed with booking since its available 
-                    database.query( `INSERT INTO user_lot (uID, lID, date, timein, timeout, price) VALUES (?, ?, ?, ?, ?, ?)`,[uID, lot, date, startTime, endTime, price],(error, results) => {
-                         if (error) {
-                           res.redirect("/notavailable");
-                        } else {
-                             res.redirect("/confirmation");
+
+                    //process payment
+                    database.query('Select * From Payment where uID = ? ',[uID],(error, results) =>{
+                        if (error){
+                            throw error;
+                        }else{
+                            if (results.length === 0){
+                                //no card found on account ({"No payment method found on your account. Go to your account to enter credit/debit card information." });
+                                res.redirect("/Nopayment");
+                            }else{
+
+                                 // proceed with booking since its available 
+                                database.query( `INSERT INTO user_lot (uID, lID, date, timein, timeout, price) VALUES (?, ?, ?, ?, ?, ?)`,[uID, lot, date, startTime, endTime, price],(error, results) => {
+                                if (error) {
+                                    res.redirect("/notavailable");
+                                } else {
+                                     res.redirect("/confirmation");
+                                }
+                            });
+
                             }
+
+                           
+
                         }
-                    );
+
+                    });
+
+
+
+                    
                 }
             }
         }
