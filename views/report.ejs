@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <link rel="stylesheet" href="/css/report.css">
+
+    <link rel="icon" type="image/x-icon" href="/Images/favicon.ico.png">
+</head>
+<body>
+    <header>
+
+        <a href="/main">
+            <img src="/Images/logo.PNG" alt="select park logo">
+            </a>
+
+           
+             <ul>
+                <li><a href="/account">Account</a></li>
+                <li class="dropdown">
+                    <a href="/booking" class="dropbtn">Reservation</a>
+                    <div class="dropdown-content">
+                        <a href="/future">Reservations</a>
+                        <a href="/past">Past Reservation</a>
+                    </div>
+                  </li>
+
+                <li><a href="/report">Report</a></li>
+                <li><a href="/feedback">Feedback</a></li>
+                <li><a href="/moreinfo">More Information</a></li>
+                <li class="logoutbtn"><a href="/login">Logout</a></li>
+            </ul>
+
+            </header>
+
+            <main>
+
+
+                <h1>Report</h1>
+    
+                <div class="instructions">
+                <p>Please enter all information to report an unauthorized vehicle in your assigned spot.</p>
+                </div>
+    
+                <form id="reportForm" action="/report" method="POST">
+    
+                
+    
+                <div id="reportInput">
+                    <label>Enter the date: </label>
+                    <input name="reportDate" type="date" required min="">
+                </div>
+    
+                <div id="reportInput">
+                    <label>Enter your confirmed <b>start</b> time: </label>
+                    <input name="reportConfirmedStartTime" type="time" required min="">
+                </div>
+    
+                <div id="reportInput">
+                    <label>Enter your confirmed <b>end</b> time: </label>
+                    <input name="reportConfirmedEndTime" type="time" required min="">
+                </div>
+    
+                <div id="reportInput">
+                    <label>Enter the time your spot was occupied by an unauthorized vehicle: </label>
+                    <input name="reportOccupiedTime" type="time" required min="">
+                </div>
+    
+                <div id="reportInput">
+                    <label>Enter your assigned spot number: </label>
+                    <input name="reportSpot" type="text" required min="">
+                </div>
+    
+                <div id="reportInput">
+                    <label>Enter the license plate of the unauthorized vehicle: </label>
+                    <input name="reportLicense" type="text" required min="">
+                </div>
+
+
+                <div style="padding-left: 25%; color: red;">
+                    <!-- message that will inserted  -->
+              <% if (message !== null) { %>
+                  <p><b><%=message%></b></p> 
+              <% } %>
+              </div>
+
+                
+
+                
+    
+    
+                <div class="buttons">
+
+                  
+                    
+                    <div><button id="cancel"><a href="/main">Cancel</a></button></div>
+                    <div><input type="submit" class="cnfm"></div>
+        
+                </div>
+
+
+                
+    
+                </form>
+    
+               
+    
+              </main>
+        <footer class="footer2">
+            
+                <p>Created by Group 4 </p> 
+    
+        </footer>
+        
+    </body>
+    </html>

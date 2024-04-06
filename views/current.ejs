@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Bookings</title>
+    <link rel="stylesheet" href="/css/bookingstyle.css">
+    <link rel="icon" type="image/x-icon" href="Images/favicon.ico.png">
+</head>
+<body>
+    <header>
+        <a href="/main">
+            <img src="/Images/logo.PNG" alt="select park logo">
+            </a>
+        <ul>
+            <li><a href="/account">Account</a></li>
+            <li class="dropdown">
+                <a href="/booking" class="dropbtn">Reservation</a>
+                <div class="dropdown-content">
+                    <a href="/current">Current Reservation</a>
+                    <a href="/future">Future Reservation</a>
+                    <a href="/past">Past Reservation</a>
+                </div>
+            </li>
+            <li><a href="/report">Report</a></li>
+            <li><a href="/feedback">Feedback</a></li>
+            <li><a href="/moreinfo">More Information</a></li>
+        </ul>
+    </header>
+    <main class="current-booking">
+        
+            <h2>Current Bookings</h2>
+            <table>
+                <thead>
+                    <tr> 
+                        <th>Lot</th><th>Date</th><th>Time-In</th><th>Time-Out</th> <th>Price</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (CurrentBooking) { %>
+                        <tr> 
+                            <td> <%= CurrentBooking.lot %> </td><td><%= CurrentBooking.date %></td><td><%= CurrentBooking.startTime %></td><td><%= CurrentBooking.endTime %></td><td><%= CurrentBooking.price %></td>
+                        </tr>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5">No current booking</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <br>
+    </main>
+    <footer>
+        <p>Created by Group 4</p> 
+    </footer>
+</body>
+</html>
