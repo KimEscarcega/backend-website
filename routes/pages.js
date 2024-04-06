@@ -148,6 +148,13 @@ router.get("/notavailable", (req,res) =>{
     
 });
 
+router.get("/Nopayment", (req,res) =>{
+    res.render("Nopayment");
+    
+});
+
+
+
 router.post('/booking', bookingController.bookingform);
 router.post('/parkinglot', bookingController.lot);
 router.post('/confirm', bookingController.confirmation);
