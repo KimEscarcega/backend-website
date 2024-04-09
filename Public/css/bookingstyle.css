@@ -427,3 +427,10 @@ body{
   float: right;
   background-color: rgb(122, 199, 224);
 }
+
+
+.future-footer, .past-footer{
+
+  margin-top: 20%;
+  
+}
