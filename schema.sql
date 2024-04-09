@@ -8,7 +8,7 @@ create table report(rID int unsigned not null auto_increment, uID int unsigned, 
 create table lot(lID int unsigned not null  AUTO_INCREMENT, lNo int, location varchar(60), primary key(lID));
 CREATE TABLE user_lot (uID INT UNSIGNED,lID INT UNSIGNED NOT NULL,date DATE,timein TIME,timeout TIME,price DECIMAL(4,2), PRIMARY KEY (lID, date, timein, timeout),FOREIGN KEY (uID) REFERENCES user(uID) ON UPDATE CASCADE ON DELETE SET NULL,FOREIGN KEY (lID) REFERENCES lot(lID) ON UPDATE CASCADE);
 CREATE TABLE password_resets (id INT AUTO_INCREMENT PRIMARY KEY, uEmail VARCHAR(60) NOT NULL, token VARCHAR(255) NOT NULL, createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, expires_at TIMESTAMP DEFAULT NULL,FOREIGN KEY (uEmail) REFERENCES user(uEmail));
-create table payment( pID int unsigned not null , uID int unsigned , cardNo varchar(16) , cardCVV int , cardExDate varchar(4),zipCode int, primary key(pID),foreign key(uID)references user(uID) );
+create table payment( pID int unsigned not null AUTO_INCREMENT, uID int unsigned , cardNo varchar(16) , cardCVV int , cardExDate varchar(4),zipCode int, primary key(pID),foreign key(uID)references user(uID) );
 
 
 
