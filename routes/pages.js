@@ -196,9 +196,7 @@ router.post("/report", reportController.report);
 
 //routes for forgot and reset password
 router.get("/forgotPassword", (req, res) => {
-    res.render("forgotten_password", {
-        title: 'Forgotten Password'
-    });
+    res.render("forgotten_password");
 });
 
 router.get("/resetPassword/:token/:email", (req, res) => {
@@ -212,58 +210,9 @@ router.get("/resetPassword/:token/:email", (req, res) => {
         token: token
     });
 });
-
-
-
-//post methods for the forgot and reset
-//routes for forgot and reset password
-router.get("/forgotPassword", (req, res) => {
-    res.render("forgotten_password", {
-        title: 'Forgotten Password'
-    });
-});
-
-router.get("/resetPassword/:token/:email", (req, res) => {
-    const token = req.params.token;
-    const email = req.params.email;
-    console.log(req);
-    res.render("reset_password", {
-        title: 'Reset Password',
-        errors: undefined,
-        email: email, // Pass email back to the template for rendering
-        token: token
-    });
-});
-
-
-
-router.get("/resetPassword", (req, res) => {
-    res.render("reset_password", {
-        title: 'Reset Password',
-        errors: undefined,
-        email: undefined, // Pass email back to the template for rendering
-        token: undefined
-    });
-});
-
+            
 router.post("/resetPassword", authController.HandleResetPassword);
-
-
-//post methods for the forgot and reset
 router.post("/forgotPassword", authController.HandleforgottenPassword);
-router.post("/resetPassword/:token/:email", authController.HandleResetPassword);
-
-
-router.get("/resetPassword", (req, res) => {
-    res.render("reset_password", {
-        title: 'Reset Password',
-        errors: undefined,
-        email: undefined, // Pass email back to the template for rendering
-        token: undefined
-    });
-});
-
-router.post("/resetPassword", authController.HandleResetPassword);
 
 
 
